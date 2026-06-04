@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikel's Professional English Track</title>
+    <style>
+        :root {
+            --pastel-green-dark: #6b8f71;
+            --pastel-green-light: #f4f7f5;
+            --pastel-blue-dark: #5c7f91;
+            --pastel-blue-light: #f0f4f8;
+            --pastel-orange-light: #fdf5e6;
+            --pastel-orange-dark: #c68a4c;
+            --pastel-bg: #f9fbf9;
+            --text-main: #334155;
+            --border-color: #cbd5e1;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: var(--pastel-bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { max-width: 950px; margin: 0 auto; }
+        header { 
+            background: linear-gradient(135deg, #b7e4c7, #94d2bd); 
+            color: #1b4332; 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+        }
+        .section-title {
+            color: #2d6a4f;
+            border-bottom: 2px solid #b7e4c7;
+            padding-bottom: 8px;
+            margin-top: 35px;
+        }
+        .scenario-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .scenario-title-text {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1b4332;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .scenario-body {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #475569;
+            background: var(--pastel-green-light);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .pv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .pv-table th, .pv-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        .pv-table th { background-color: var(--pastel-blue-light); color: var(--pastel-blue-dark); }
+        .exercise-select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-top: 8px;
+            width: 100%;
+            background-color: white;
+            font-size: 14px;
+        }
+        .inline-select {
+            width: auto;
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 0 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+        }
+        .btn-validate {
+            background-color: var(--pastel-green-dark);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .btn-validate:hover { opacity: 0.9; }
+        .random-options-box {
+            background-color: var(--pastel-orange-light);
+            border-left: 4px solid var(--pastel-orange-dark);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #7c2d12;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Mikel's Professional English Track</h1>
+        <p>Video: A day in the life of the UK</p>
+    </header>
+
+    <p style="font-style: italic; color: #64748b;">Read each scenario and choose your response.</p>
+
+    <!-- SCENARIOS -->
+    <div id="scenarios-container">
+        <!-- 1 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">1. The polished chapter</span>
+            <div class="scenario-body">A doctoral student you have supervised for three years submits a chapter of disquieting accomplishment. A close reading leads you to a near-certain conclusion: she has passed off substantial passages from an obscure monograph as her own thinking, confident no detection algorithm will flag up a source it has never encountered. The plagiarism is systematic enough to rule out negligence, yet not demonstrable enough to hold up before a tribunal lacking your specialist knowledge. Exposing her ends her career. Saying nothing makes you party to a deception that could unravel at any point over the next thirty years.</div>
+        </div>
+        <!-- 2 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">2. The dominant seminar voice</span>
+            <div class="scenario-body">A student of exceptional ability has crowded out the rest of the seminar — not through aggression, but through a gravitational confidence quieter students cannot match in real time. Participation has levelled off at three or four voices. A pattern is playing out that you recognise from faculty committees: the silent majority's written work is beginning to suffer. The dynamic cuts across the whole cohort. Intervening risks pathologising what makes him exceptional; not intervening normalises a conversational structure some students will carry over into their own careers.</div>
+        </div>
+        <!-- 3 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">3. The grade appeal</span>
+            <div class="scenario-body">A student lodges a formal appeal you initially dismissed as tactical. Re-reading without marking fatigue, you tease out a counter-argument that is genuinely more sophisticated than you credited. Revising upward is honest — but it throws up a structural problem: four other students received identical marks for comparable work. Whether your original assessment would hold up under external moderation is uncomfortable to consider. Revising opens a cascade; not revising requires you to sustain a judgement you can no longer stand by.</div>
+        </div>
+        <!-- 4 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">4. The fabricated data</span>
+            <div class="scenario-body">Reviewing a pre-print by the colleague who secured your tenure, you notice a statistical anomaly that is almost certainly deliberate. The research underpins two ongoing clinical trials. Flagging up your concerns means bringing down not only a career but an entire line of inquiry — and triggering a departmental audit from which no one emerges intact. Staying silent is collusion you could not ride out if the fabrication surfaces independently, as it almost certainly will.</div>
+        </div>
+        <!-- 5 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">5. The viral clip</span>
+            <div class="scenario-body">A deliberately provocative remark — understood as irony by everyone present — has been stripped of context and posted online, where it is playing out as a straightforward expression of the view you were interrogating. The communications office urges you to put out a statement. Any public response risks amplifying the story; a clumsy apology may be read as an admission. The alternative is to sit it out. What you cannot factor in is whether silence will be construed as confirmation.</div>
+        </div>
+        <!-- 6 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">6. The mature student</span>
+            <div class="scenario-body">A student who spent twenty years in senior risk management cannot convert experiential intelligence into academic currency. He resists every overture of support, reading the offer of guidance as an implicit verdict on his performance. You could map out a tailored remediation path — but without his consent, doing so risks compounding the very humiliation that is holding him back. Leaving him to his own devices — writing him off, in effect — wastes someone who could produce original work by drawing on a practitioner's perspective none of his peers can replicate.</div>
+        </div>
+        <!-- 7 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">7. The research grant</span>
+            <div class="scenario-body">A leading asset management firm offers to fund a five-year research programme into the long-run performance of actively managed equity funds — precisely the question your department has spent a decade building the data infrastructure to answer. One clause grants the sponsor the right to sit on any findings it deems commercially sensitive for an indefinite period. You have weighed up the alternatives. Accepting means producing work that may never reach publication, or reach it only dressed up to vindicate a fund range the data does not support. Declining means winding up the most significant empirical project of your career. The arrangement is being glossed over in departmental communications as a standard data-access partnership. It is not.</div>
+        </div>
+        <!-- 8 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">8. The undocumented extension</span>
+            <div class="scenario-body">A student requests a compassionate extension she finds credible but will not document through the welfare process, claiming it would compound her distress. The institutional requirement exists partly to prevent the system being played. Granting an undocumented exception sets a precedent you cannot walk back — word spreads, and you will soon adjudicate claims you cannot verify. Refusing requires you to see through a decision whose practical effects you consider disproportionate, on procedural grounds you privately doubt.</div>
+        </div>
+        <!-- 9 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">9. The walkout</span>
+            <div class="scenario-body">A third of your students have walked out in protest against a university policy you privately consider indefensible. Those who remained are visibly uncomfortable. The departmental line treats this as a disciplinary matter. You are unwilling to go along with that framing, which would require you to call out behaviour you consider justified. Papering over the genuine grievance through neutral language feels dishonest; staying silent plays into the hands of those claiming the walkout was tacitly approved.</div>
+        </div>
+        <!-- 10 -->
+        <div class="scenario-card">
+            <span class="scenario-title-text">10. The deteriorating candidate</span>
+            <div class="scenario-body">Your most promising doctoral candidate, months from submission, is showing signs you can no longer gloss over: unworkable timelines, erratic communication, analytical capacity breaking down under pressure she refuses to name. Every attempt to open a conversation is brushed off. You suspect she is terrified that acknowledging difficulty will mark her out as unsuitable for the academic career she has planned. Your instinct is to step in. The institution has failed to flesh out its guidance on what that would mean legally or ethically, leaving you to act in a grey area and own the consequences.</div>
+        </div>
+    </div>
+
+    <!-- ACTIVITY 1: PHRASAL VERBS -->
+    <h2 class="section-title">ACTIVITY 1: Phrasal Verbs Glossary</h2>
+    
+    <table class="pv-table">
+        <thead>
+            <tr>
+                <th>Phrasal Verb</th>
+                <th>Core Meaning Selection Challenge</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>pass off (as)</strong></td>
+                <td>
+                    <select id="gloss_challenge_1" class="exercise-select">
+                        <option value="">-- Choose core definition --</option>
+                        <option value="correct">Present something false as genuine (Correct)</option>
+                        <option value="wrong">To hand over control or ownership without signature (Incorrect)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>flag up</strong></td>
+                <td>Draw urgent attention to a risk or problem</td>
+            </tr>
+            <tr>
+                <td><strong>hold up (under scrutiny)</strong></td>
+                <td>Remain valid when examined closely</td>
+            </tr>
+            <tr>
+                <td><strong>unravel</strong></td>
+                <td>Come apart gradually, exposing underlying flaws</td>
+            </tr>
+            <tr>
+                <td><strong>crowd out</strong></td>
+                <td>Displace by occupying all available space/attention</td>
+            </tr>
+            <tr>
+                <td><strong>level off</strong></td>
+                <td>Stabilise after a period of change</td>
+            </tr>
+            <tr>
+                <td><strong>play out</strong></td>
+                <td>Develop or unfold in a particular way</td>
+            </tr>
+            <tr>
+                <td><strong>cut across</strong></td>
+                <td>Apply to or affect multiple distinct groups</td>
+            </tr>
+            <tr>
+                <td><strong>carry over</strong></td>
+                <td>Transfer a pattern or behaviour into a new context</td>
+            </tr>
+            <tr>
+                <td><strong>tease out</strong></td>
+                <td>Identify something subtle through careful analysis</td>
+            </tr>
+            <tr>
+                <td><strong>throw up</strong></td>
+                <td>Generate or produce (problems, questions)</td>
+            </tr>
+            <tr>
+                <td><strong>stand by</strong></td>
+                <td>Continue to uphold a position or decision</td>
+            </tr>
+            <tr>
+                <td><strong>ride out</strong></td>
+                <td>Endure a difficult period until it passes</td>
+            </tr>
+            <tr>
+                <td><strong>sit out</strong></td>
+                <td>Wait passively without acting until something is over</td>
+            </tr>
+            <tr>
+                <td><strong>factor in</strong></td>
+                <td>Include something in reasoning or calculation</td>
+            </tr>
+            <tr>
+                <td><strong>map out</strong></td>
+                <td>Plan or describe in systematic, deliberate detail</td>
+            </tr>
+            <tr>
+                <td><strong>write off</strong></td>
+                <td>Dismiss as beyond recovery; record a loss</td>
+            </tr>
+            <tr>
+                <td><strong>draw on</strong></td>
+                <td>Use a resource, experience, or skill actively</td>
+            </tr>
+            <tr>
+                <td><strong>sit on</strong></td>
+                <td>Deliberately delay or suppress information</td>
+            </tr>
+            <tr>
+                <td><strong>weigh up</strong></td>
+                <td>Carefully consider competing factors</td>
+            </tr>
+            <tr>
+                <td><strong>wind up</strong></td>
+                <td>Bring to a close; terminate</td>
+            </tr>
+            <tr>
+                <td><strong>gloss over</strong></td>
+                <td>Pass over quickly to avoid scrutiny</td>
+            </tr>
+            <tr>
+                <td><strong>walk back</strong></td>
+                <td>Retract or soften a previous position</td>
+            </tr>
+            <tr>
+                <td><strong>see through</strong></td>
+                <td>Complete despite difficulty; or: not be deceived by</td>
+            </tr>
+            <tr>
+                <td><strong>go along with</strong></td>
+                <td>Accept or agree without strong conviction</td>
+            </tr>
+            <tr>
+                <td><strong>call out</strong></td>
+                <td>Publicly identify and challenge problematic behaviour</td>
+            </tr>
+            <tr>
+                <td><strong>paper over</strong></td>
+                <td>Conceal a problem while creating appearance of resolution</td>
+            </tr>
+            <tr>
+                <td><strong>play into</strong></td>
+                <td>Inadvertently serve someone else's interests or narrative</td>
+            </tr>
+            <tr>
+                <td><strong>break down</strong></td>
+                <td>Cease to function; or: become emotionally overwhelmed</td>
+            </tr>
+            <tr>
+                <td><strong>brush off</strong></td>
+                <td>Dismiss without proper engagement</td>
+            </tr>
+            <tr>
+                <td><strong>flesh out</strong></td>
+                <td>Add substance and detail to something incomplete</td>
+            </tr>
+            <tr>
+                <td><strong>step in</strong></td>
+                <td>Intervene where another has failed or is unable to act</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ACTIVITY B -->
+    <h2 class="section-title">Activity B - Choose the most precise phrasal verb</h2>
+    
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>1.</strong> The audit findings had been __________ in the board presentation. No one mentioned the covenant breach.</p>
+        <select id="act_b_opt_1" class="exercise-select">
+            <option value="">-- Choose option --</option>
+            <option value="a">(a) glossed over</option>
+            <option value="b">(b) papered over</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>2.</strong> His original forecast didn't __________ once the Q3 data came in.</p>
+        <select id="act_b_opt_2" class="exercise-select">
+            <option value="">-- Choose option --</option>
+            <option value="a">(a) hold up</option>
+            <option value="b">(b) bear out</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>3.</strong> The restructuring __________ risks that hadn't appeared in the original due diligence.</p>
+        <select id="act_b_opt_3" class="exercise-select">
+            <option value="">-- Choose option --</option>
+            <option value="a">(a) threw up</option>
+            <option value="b">(b) brought up</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>4.</strong> The committee chose to __________ the controversy and wait for the cycle to move on.</p>
+        <select id="act_b_opt_4" class="exercise-select">
+            <option value="">-- Choose option --</option>
+            <option value="a">(a) ride out</option>
+            <option value="b">(b) sit out</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>5.</strong> She __________ the criticism in the meeting without responding.</p>
+        <select id="act_b_opt_5" class="exercise-select">
+            <option value="">-- Choose option --</option>
+            <option value="a">(a) brushed off</option>
+            <option value="b">(b) glossed over</option>
+        </select>
+    </div>
+    
+    <button class="btn-validate" onclick="validateActivityB()">Validate Activity B</button>
+
+    <!-- ACTIVITY C -->
+    <h2 class="section-title">Activity C - Complete each sentence with the correct phrasal verb</h2>
+    
+    <div class="random-options-box">
+        <strong>Randomized Target Bank:</strong> sitting on / hold up / go along with / threw up / papered over / written off / factor in / draw on / flagged up
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>1. The CFO had been <select id="act_c_1" class="inline-select"><option value="">---</option><option value="sitting_on">sitting on</option><option value="papered_over">papered over</option></select> the liquidity shortfall for two quarters. By the time the auditors arrived, the situation was irretrievable.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>2. The stress test results didn't <select id="act_c_2" class="inline-select"><option value="">---</option><option value="hold_up">hold up</option><option value="factor_in">factor in</option></select> under the EBA's methodology — three assumptions failed immediately.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>3. Signing the prospectus required her to <select id="act_c_3" class="inline-select"><option value="">---</option><option value="go_along_with">go along with</option><option value="draw_on">draw on</option></select> a risk disclosure she knew to be materially incomplete.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>4. The merger <select id="act_c_4" class="inline-select"><option value="">---</option><option value="threw_up">threw up</option><option value="flagged_up">flagged up</option></select> regulatory complications that legal had entirely failed to anticipate.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>5. Rather than address the governance failure directly, the board <select id="act_c_5" class="inline-select"><option value="">---</option><option value="papered_over">papered over</option><option value="sitting_on">sitting on</option></select> it with a working group whose terms of reference were drafted to go nowhere.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>6. He had been <select id="act_c_6" class="inline-select"><option value="">---</option><option value="written_off">written off</option><option value="hold_up">hold up</option></select> as a potential partner within the first meeting — too transactional, unwilling to share data.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>7. The analyst's thesis didn't <select id="act_c_7" class="inline-select"><option value="">---</option><option value="hold_up">hold up</option><option value="threw_up">threw up</option></select> once the commodity cycle turned.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>8. You need to <select id="act_c_8" class="inline-select"><option value="">---</option><option value="factor_in">factor in</option><option value="go_along_with">go along with</option></select> the tax implications before you model the exit multiple.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>9. She was able to <select id="act_c_9" class="inline-select"><option value="">---</option><option value="draw_on">draw on</option><option value="written_off">written off</option></select> twenty years of credit risk experience that none of the academic co-authors could replicate.</p>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-orange-dark);">
+        <p>10. The compliance team <select id="act_c_10" class="inline-select"><option value="">---</option><option value="flagged_up">flagged up</option><option value="papered_over">papered over</option></select> three anomalies in the transaction data that the front office had not reported.</p>
+    </div>
+
+    <button class="btn-validate" style="background-color: var(--pastel-orange-dark);" onclick="validateActivityC()">Validate Activity C</button>
+
+</div>
+
+<script>
+    function validateActivityB() {
+        let answers = { act_b_opt_1: 'a', act_b_opt_2: 'a', act_b_opt_3: 'a', act_b_opt_4: 'b', act_b_opt_5: 'a' };
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+            let el = document.getElementById(id);
+            if(el.value === answers[id]) { el.style.borderColor = "#6b8f71"; score++; }
+            else { el.style.borderColor = "#c68a4c"; }
+        });
+        alert("Activity B: " + score + " / 5 correct entries recorded.");
+    }
+
+    function validateActivityC() {
+        let answers = {
+            act_c_1: 'sitting_on', act_c_2: 'hold_up', act_c_3: 'go_along_with', act_c_4: 'threw_up',
+            act_c_5: 'papered_over', act_c_6: 'written_off', act_c_7: 'hold_up', act_c_8: 'factor_in',
+            act_c_9: 'draw_on', act_c_10: 'flagged_up'
+        };
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+            let el = document.getElementById(id);
+            if(el.value === answers[id]) { el.style.borderColor = "#6b8f71"; score++; }
+            else { el.style.borderColor = "#c68a4c"; }
+        });
+        alert("Activity C: " + score + " / 10 correct contextual phrasal choices.");
+    }
+</script>
+</body>
+</html>
