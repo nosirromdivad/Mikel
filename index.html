@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikel's Professional English Track</title>
+    <style>
+        :root {
+            --pastel-green-dark: #6b8f71;
+            --pastel-green-light: #f4f7f5;
+            --pastel-blue-dark: #5c7f91;
+            --pastel-blue-light: #f0f4f8;
+            --pastel-orange-light: #fdf5e6;
+            --pastel-orange-dark: #c68a4c;
+            --pastel-bg: #f9fbf9;
+            --text-main: #334155;
+            --border-color: #cbd5e1;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: var(--pastel-bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { max-width: 950px; margin: 0 auto; }
+        header { 
+            background: linear-gradient(135deg, #b7e4c7, #94d2bd); 
+            color: #1b4332; 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+        }
+        .date-badge {
+            display: inline-block;
+            background-color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-top: 10px;
+        }
+        .tab-menu { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; justify-content: center; }
+        .tab-btn { 
+            background-color: #e2e8f0; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-size: 14px;
+            color: #475569;
+        }
+        .tab-btn.active { background-color: var(--pastel-green-dark); color: white; }
+        .panel { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
+            display: none; 
+            border: 1px solid #e2e8f0;
+        }
+        .panel.active { display: block; }
+        h2 { border-bottom: 2px solid #b7e4c7; padding-bottom: 8px; color: #2d6a4f; margin-top: 0; }
+        .instruction { font-style: italic; color: #64748b; margin-bottom: 20px; }
+        .exercise-card { 
+            margin-bottom: 20px; 
+            padding: 18px; 
+            background: var(--pastel-green-light); 
+            border-left: 5px solid var(--pastel-green-dark); 
+            border-radius: 4px 12px 12px 4px; 
+        }
+        .exercise-card-blue { 
+            margin-bottom: 20px; 
+            padding: 18px; 
+            background: var(--pastel-blue-light); 
+            border-left: 5px solid var(--pastel-blue-dark); 
+            border-radius: 4px 12px 12px 4px; 
+        }
+        .exercise-card-orange { 
+            margin-bottom: 25px; 
+            padding: 20px; 
+            background: var(--pastel-orange-light); 
+            border-left: 5px solid var(--pastel-orange-dark); 
+            border-radius: 4px 12px 12px 4px; 
+        }
+        .scenario-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        select { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 8px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            background-color: white;
+            font-size: 15px; 
+            color: var(--text-main);
+            cursor: pointer;
+        }
+        select.inline-select {
+            width: auto;
+            display: inline-block;
+            padding: 6px 10px;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+        .btn-action { 
+            background: var(--pastel-green-dark); 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            font-size: 15px; 
+            border-radius: 8px; 
+            margin-top: 15px; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+        .reaction-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Mikel's Professional English Track</h1>
+        <p>Interactive Analysis & Academic Dilemmas Dashboard</p>
+        <div class="date-badge">Session Date: June 4, 2026</div>
+    </header>
+
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="switchTab(0)">Activity A: Precise Usage</button>
+        <button class="tab-btn" onclick="switchTab(1)">Activity B: Case Verbs</button>
+        <button class="tab-btn" onclick="switchTab(2)">Activity C: Scenario Reactions</button>
+    </div>
+
+    <!-- ACTIVITY A -->
+    <div class="panel active">
+        <h2>Activity A - Precise Contextual Selection</h2>
+        <p class="instruction">Select the most precise phrasal verb based on the usage guidelines.</p>
+        
+        <div class="exercise-card">
+            <p><strong>1.</strong> The audit findings had been __________ in the board presentation. No one mentioned the covenant breach.</p>
+            <select id="act_a_1">
+                <option value="">-- Make your choice --</option>
+                <option value="glossed_over">glossed over (Correct: implies passing over quickly to avoid scrutiny)</option>
+                <option value="papered_over">papered over (Incorrect: implies active concealment)</option>
+            </select>
+        </div>
+
+        <div class="exercise-card">
+            <p><strong>2.</strong> His original forecast didn't __________ once the Q3 data came in.</p>
+            <select id="act_a_2">
+                <option value="">-- Make your choice --</option>
+                <option value="hold_up">hold up (Correct: remains valid under stress-testing)</option>
+                <option value="bear_out">bear out (Less accurate here: usually takes a person or hypothesis as object)</option>
+            </select>
+        </div>
+
+        <div class="exercise-card">
+            <p><strong>3.</strong> The restructuring __________ risks that hadn't appeared in the original due diligence.</p>
+            <select id="act_a_3">
+                <option value="">-- Make your choice --</option>
+                <option value="threw_up">threw up (Correct: generates unexpected issues or anomalies)</option>
+                <option value="brought_up">brought up (Less accurate: means explicitly mentioning a conversational topic)</option>
+            </select>
+        </div>
+
+        <div class="exercise-card">
+            <p><strong>4.</strong> The committee chose to __________ the controversy and wait for the cycle to move on.</p>
+            <select id="act_a_4">
+                <option value="">-- Make your choice --</option>
+                <option value="sit_out">sit out (Correct: wait passively without taking action until it passes over)</option>
+                <option value="ride_out">ride out (Incorrect: implies active endurance of an unavoidable current crisis)</option>
+            </select>
+        </div>
+
+        <div class="exercise-card">
+            <p><strong>5.</strong> She __________ the criticism in the meeting without responding.</p>
+            <select id="act_a_5">
+                <option value="">-- Make your choice --</option>
+                <option value="brushed_off">brushed off (Correct: dismissed outright without proper engagement)</option>
+                <option value="glossed_over">glossed over (Incorrect: you gloss over facts or data, you brush off attacks)</option>
+            </select>
+        </div>
+
+        <button class="btn-action" onclick="gradeActivityA()">Validate Activity A</button>
+    </div>
+
+    <!-- ACTIVITY B -->
+    <div class="panel">
+        <h2>Activity B - Inline Phrasal Completion</h2>
+        <p class="instruction">Choose the structurally accurate phrasal verb syntax to complete the case parameters.</p>
+
+        <div class="exercise-card-blue">
+            <p>1. The CFO had been <select id="act_b_1" class="inline-select"><option value="">---</option><option value="sitting_on">sitting on</option><option value="glossing_over">glossing over</option></select> the liquidity shortfall for two quarters. By the time the auditors arrived, the situation was irretrievable.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>2. The stress test results didn't <select id="act_b_2" class="inline-select"><option value="">---</option><option value="hold_up">hold up</option><option value="level_off">level off</option></select> under the EBA's methodology — three assumptions failed immediately.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>3. Signing the prospectus required her to <select id="act_b_3" class="inline-select"><option value="">---</option><option value="go_along_with">go along with</option><option value="walk_back">walk back</option></select> a risk disclosure she knew to be materially incomplete.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>4. The merger <select id="act_b_4" class="inline-select"><option value="">---</option><option value="threw_up">threw up</option><option value="fleshed_out">fleshed out</option></select> regulatory complications that legal had entirely failed to anticipate.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>5. Rather than address the governance failure directly, the board <select id="act_b_5" class="inline-select"><option value="">---</option><option value="papered_over">papered over</option><option value="sit_out">sit out</option></select> it with a working group whose terms of reference were drafted to go nowhere.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>6. He had been <select id="act_b_6" class="inline-select"><option value="">---</option><option value="written_off">written off</option><option value="called_out">called out</option></select> as a potential partner within the first meeting — too transactional, unwilling to share data.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>7. The analyst's thesis didn't <select id="act_b_7" class="inline-select"><option value="">---</option><option value="hold_up">hold up</option><option value="unravel">unravel</option></select> once the commodity cycle turned.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>8. You need to <select id="act_b_8" class="inline-select"><option value="">---</option><option value="factor_in">factor in</option><option value="map_out">map out</option></select> the tax implications before you model the exit multiple.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>9. She was able to <select id="act_b_9" class="inline-select"><option value="">---</option><option value="draw_on">draw on</option><option value="tease_out">tease out</option></select> twenty years of credit risk experience that none of the academic co-authors could replicate.</p>
+        </div>
+        <div class="exercise-card-blue">
+            <p>10. The compliance team <select id="act_b_10" class="inline-select"><option value="">---</option><option value="flagged_up">flagged up</option><option value="brushed_off">brushed off</option></select> three anomalies in the transaction data that the front office had not reported.</p>
+        </div>
+
+        <button class="btn-action" style="background-color: var(--pastel-blue-dark);" onclick="gradeActivityB()">Validate Activity B</button>
+    </div>
+
+    <!-- ACTIVITY C -->
+    <div class="panel">
+        <h2>Activity C: Dilemma Scenario Reactions</h2>
+        <p class="instruction">Read each academic case study and use the dropdown to explore three different strategic responses and their logical language parameters.</p>
+
+        <!-- SCENARIO 1 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 1: The Polished Chapter</strong></p>
+            <div class="scenario-text">A doctoral student has systematically passed off passages from an obscure monograph as her own thinking.</div>
+            <select onchange="showReaction(this, 'r1')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: File a formal tribunal complaint immediately to call out the deception.</option>
+                <option value="B">Reaction B: Confront her privately, allowing her to rewrite before long-term flaws unravel.</option>
+                <option value="C">Reaction C: Say nothing, letting the thesis stand by to avoid destroying her career path.</option>
+            </select>
+            <div id="r1" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 2 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 2: The Dominant Seminar Voice</strong></p>
+            <div class="scenario-text">A student of exceptional ability has crowded out the rest of the seminar, leveling off general participation.</div>
+            <select onchange="showReaction(this, 'r2')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Intervene directly to break the dynamic and support the silent majority.</option>
+                <option value="B">Reaction B: Adjust seminar guidelines to factor in mandatory rotation parameters.</option>
+                <option value="C">Reaction C: Leave the structure to play out organically as a baseline career context.</option>
+            </select>
+            <div id="r2" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 3 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 3: The Grade Appeal</strong></p>
+            <div class="scenario-text">Teasing out a student's appeal shows their argument is superior, but updating it opens a grading cascade.</div>
+            <select onchange="showReaction(this, 'r3')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Revise upward immediately to remain honest to your true assessment.</option>
+                <option value="B">Reaction B: Submit the entire cohort module to external moderation to stress-test your baseline.</option>
+                <option value="C">Reaction C: Reject the appeal to avoid walking back your previous structural markers.</option>
+            </select>
+            <div id="r3" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 4 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 4: The Fabricated Data</strong></p>
+            <div class="scenario-text">You notice a statistical fabrication in a pre-print by the colleague who secured your tenure.</div>
+            <select onchange="showReaction(this, 'r4')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Flag up the anomaly to the clinical review panel to avoid dangerous collusion.</option>
+                <option value="B">Reaction B: Give the colleague a direct ultimatum to retract the text before it surfaces.</option>
+                <option value="C">Reaction C: Keep quiet to safeguard the entire department from a catastrophic audit.</option>
+            </select>
+            <div id="r4" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 5 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 5: The Viral Clip</strong></p>
+            <div class="scenario-text">An ironic remark has been stripped of context online, risking confirmation of a toxic narrative.</div>
+            <select onchange="showReaction(this, 'r5')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Put out a detailed statement clarifying the exact context of the session.</option>
+                <option value="B">Reaction B: Sit it out completely, refusing to feed or amplify the media loop.</option>
+                <option value="C">Reaction C: Coauthor a formal communication strategy alongside the university press office.</option>
+            </select>
+            <div id="r5" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 6 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 6: The Mature Student</strong></p>
+            <div class="scenario-text">An experienced risk manager brushes off academic support, viewing it as an implicit failure.</div>
+            <select onchange="showReaction(this, 'r6')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Map out a highly tailored remediation path despite his initial resistance.</option>
+                <option value="B">Reaction B: Write him off academically and let him rely purely on his own devices.</option>
+                <option value="C">Reaction C: Redesign tasks to actively draw on his deep corporate experience.</option>
+            </select>
+            <div id="r6" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 7 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 7: The Research Grant</strong></p>
+            <div class="scenario-text">An asset management firm offers massive funding but demands the right to sit on commercial data.</div>
+            <select onchange="showReaction(this, 'r7')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Decline the funding contract to prevent corporate suppression of empirical research.</option>
+                <option value="B">Reaction B: Accept the agreement to avoid winding up your ten-year database project.</option>
+                <option value="C">Reaction C: Go along with the departmental line and gloss over the sensitivity clauses.</option>
+            </select>
+            <div id="r7" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 8 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 8: The Undocumented Extension</strong></p>
+            <div class="scenario-text">A distressed student requests an extension but refuses to document it through official channels.</div>
+            <select onchange="showReaction(this, 'r8')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Refuse the request on procedural grounds to maintain equitable system limits.</option>
+                <option value="B">Reaction B: Grant the exception silently, trusting your subjective view of her distress.</option>
+                <option value="C">Reaction C: Escalate the matter to a welfare officer to tease out an alternative path.</option>
+            </select>
+            <div id="r8" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 9 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 9: The Walkout</strong></p>
+            <div class="scenario-text">A third of the class walks out over university policy. The department wants them called out.</div>
+            <select onchange="showReaction(this, 'r9')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Explicitly support the walkout, refusing to go along with the disciplinary framing.</option>
+                <option value="B">Reaction B: Use neutral language to paper over the rift and protect the remaining cohort.</option>
+                <option value="C">Reaction C: Suspend the session entirely until the operational grievance is settled.</option>
+            </select>
+            <div id="r9" class="reaction-box"></div>
+        </div>
+
+        <!-- SCENARIO 10 -->
+        <div class="exercise-card-orange">
+            <p><strong>Scenario 10: The Deteriorating Candidate</strong></p>
+            <div class="scenario-text">Your top doctoral candidate is breaking down under pressure but brushes off help.</div>
+            <select onchange="showReaction(this, 'r10')">
+                <option value="">-- Choose a Rejection / Action Path --</option>
+                <option value="A">Reaction A: Step in forcefully and implement emergency leave options immediately.</option>
+                <option value="B">Reaction B: Respect her boundaries to avoid compounding her professional panic.</option>
+                <option value="C">Reaction C: Request institutional backing to flesh out the missing legal frameworks.</option>
+            </select>
+            <div id="r10" class="reaction-box"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function switchTab(idx) {
+        let tabs = document.querySelectorAll('.tab-btn');
+        let panels = document.querySelectorAll('.panel');
+        tabs.forEach((tab, i) => {
+            tab.classList.toggle('active', i === idx);
+            panels[i].classList.toggle('active', i === idx);
+        });
+    }
+
+    function gradeActivityA() {
+        let answers = {act_a_1: 'glossed_over', act_a_2: 'hold_up', act_a_3: 'threw_up', act_a_4: 'sit_out', act_a_5: 'brushed_off'};
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+            let el = document.getElementById(id);
+            if(el.value === answers[id]) { el.style.borderColor = "#a7c957"; score++; }
+            else { el.style.borderColor = "#f28482"; }
+        });
+        alert("Activity A Analysis: " + score + " / 5 correct choices.");
+    }
+
+    function gradeActivityB() {
+        let answers = {
+            act_b_1: 'sitting_on', act_b_2: 'hold_up', act_b_3: 'go_along_with', act_b_4: 'threw_up', 
+            act_b_5: 'papered_over', act_b_6: 'written_off', act_b_7: 'hold_up', act_b_8: 'factor_in', 
+            act_b_9: 'draw_on', act_b_10: 'flagged_up'
+        };
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+            let el = document.getElementById(id);
+            if(el.value === answers[id]) { el.style.borderColor = "#a7c957"; score++; }
+            else { el.style.borderColor = "#f28482"; }
+        });
+        alert("Activity B Analysis: " + score + " / 10 correct choices.");
+    }
+
+    function showReaction(selectEl, targetId) {
+        let box = document.getElementById(targetId);
+        let val = selectEl.value;
+        
+        let reactionsText = {
+            r1: {
+                A: "<strong>Analysis:</strong> By calling out her actions, you preserve academic integrity, but her career will fully unravel immediately.",
+                B: "<strong>Analysis:</strong> This avoids a public tribunal, but you must help her flesh out a genuine argument from scratch.",
+                C: "<strong>Analysis:</strong> You avoid immediate conflict, but you become party to a deception that could play out negatively for decades."
+            },
+            r2: {
+                A: "<strong>Analysis:</strong> This prevents him from crowding out others, but risks pathologizing his exceptional talent.",
+                B: "<strong>Analysis:</strong> A systematic fix that ensures quieter voices do not level off permanently.",
+                C: "<strong>Analysis:</strong> You allow structural hierarchy to carry over into their future professional habits."
+            },
+            r3: {
+                A: "<strong>Analysis:</strong> An honest revision, but it throws up a dangerous precedent for equivalent marks.",
+                B: "<strong>Analysis:</strong> Testing your marking profile under external scrutiny ensures you can stand by your judgment.",
+                C: "<strong>Analysis:</strong> This stops a cascade, but forces you to support a grade you can no longer stand by."
+            },
+            r4: {
+                A: "<strong>Analysis:</strong> You protect the ongoing clinical trials, but you will bring down a key foundational career.",
+                B: "<strong>Analysis:</strong> You give them a chance to walk back the metrics before a catastrophic audit occurs.",
+                C: "<strong>Analysis:</strong> Staying silent means collusion you cannot ride out once it surfaces independently."
+            },
+            r5: {
+                A: "<strong>Analysis:</strong> Clear communication, but a clumsy response risks amplifying the story further online.",
+                B: "<strong>Analysis:</strong> Sitting it out is tactical, but silence might be construed as confirmation of the claim.",
+                C: "<strong>Analysis:</strong> Working closely with PR to paper over the crisis before structural parameters break down."
+            },
+            r6: {
+                A: "<strong>Analysis:</strong> Actively guiding him, though doing so without consent risks compounding his humiliation.",
+                B: "<strong>Analysis:</strong> Writing him off completely wastes an expert who could draw on unique real-world value.",
+                C: "<strong>Analysis:</strong> A collaborative compromise that lets him showcase advanced strategic frameworks."
+            },
+            r7: {
+                A: "<strong>Analysis:</strong> You protect research independence instead of allowing corporate entities to sit on sensitive data.",
+                B: "<strong>Analysis:</strong> You save your dataset, but risk producing work that is dressed up to serve a corporate narrative.",
+                C: "<strong>Analysis:</strong> Passive compliance that allows the firm to gloss over real empirical restrictions."
+            },
+            r8: {
+                A: "<strong>Analysis:</strong> You preserve institutional compliance, but enforce a disproportionate practical effect.",
+                B: "<strong>Analysis:</strong> You ease immediate distress, but set an undocumented precedent you cannot walk back.",
+                C: "<strong>Analysis:</strong> You stay within system rules while attempting to tease out a compassionate exception path."
+            },
+            r9: {
+                A: "<strong>Analysis:</strong> You align with your private ethics, but openly challenge the rigid departmental line.",
+                B: "<strong>Analysis:</strong> Neutral phrasing might paper over the immediate tension, but feels fundamentally dishonest.",
+                C: "<strong>Analysis:</strong> Prevents picking sides, but implies the walkout was tacitly approved by faculty staff."
+            },
+            r10: {
+                A: "<strong>Analysis:</strong> You step into a clear grey area legally, but prioritize her mental welfare over guidelines.",
+                B: "<strong>Analysis:</strong> Avoids legal boundaries, but ignores a candidate whose analytical capacity is breaking down.",
+                C: "<strong>Analysis:</strong> Forces the university to flesh out its missing ethical frameworks under stress."
+            }
+        };
+
+        if (val && reactionsText[targetId] && reactionsText[targetId][val]) {
+            box.innerHTML = reactionsText[targetId][val];
+            box.style.display = "block";
+            box.style.backgroundColor = "#fffdf0";
+        } else {
+            box.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
