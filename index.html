@@ -383,15 +383,12 @@
         <div class="header-date">June 5, 2026</div>
     </header>
 
-    <!-- Navigation Tabs System -->
     <div class="tab-navigation">
         <button id="btn_main_tab" class="tab-button active-tab" onclick="switchTabs('main_modules_tab', 'btn_main_tab')">Main Modules</button>
         <button id="btn_grave_tab" class="tab-button grave-tab-btn" onclick="switchTabs('graveyard_tab', 'btn_grave_tab')">The Graveyard 💀</button>
     </div>
 
-    <!-- TAB 1: MAIN COURSEWORK MODULES -->
     <div id="main_modules_tab" class="tab-content active-content">
-        <!-- ACTIVITY 1 -->
         <h2 class="section-title" style="margin-top: 10px;">Activity 1</h2>
         <p style="font-style: italic; color: #64748b;">Read each scenario and choose your response. Your choices are automatically saved.</p>
 
@@ -492,7 +489,6 @@
             <button class="btn-validate" onclick="alert('Choices pinned to system memory successfully!')">Save Choices</button>
         </div>
 
-        <!-- ACTIVITY 2 -->
         <h2 class="section-title">Activity 2</h2>
         <p style="font-style: italic; color: #64748b;">Match the phrasal verbs to their precise definitions.</p>
         
@@ -536,7 +532,6 @@
             <strong>Activity 2 Key:</strong> All selection blocks must map explicitly to option one ("correct") to complete your evaluation criteria successfully.
         </div>
 
-        <!-- ACTIVITY 3 -->
         <h2 class="section-title">Activity 3</h2>
         <p style="font-style: italic; color: #64748b;">Complete the sentences by selecting the correct combination of particles.</p>
 
@@ -706,12 +701,10 @@
         </div>
     </div>
 
-    <!-- TAB 2: THE GRAVEYARD TAB (ISOLATED WORKSPACE) -->
     <div id="graveyard_tab" class="tab-content">
         <h2 class="section-title graveyard-title">The Graveyard</h2>
         <p style="font-style: italic; color: #64748b;">Where habitual structural mistakes go to die. Target: Fossilized Spanish Interference Patterns.</p>
 
-        <!-- PART A: MAKE VS DO -->
         <h3 class="grave-sub-header">Part A: Advanced Collocations (Make vs. Do)</h3>
         <div class="graveyard-explanation">
             <strong>Engine Mechanics:</strong> Use <strong>DO</strong> for actions, processes, and obligations (execution of an activity). Use <strong>MAKE</strong> for generating outcomes, constructions, reactions, or specific results.
@@ -819,7 +812,6 @@
             </div>
         </div>
 
-        <!-- Verification Unit for Part A based on image_c351a0.png layout -->
         <div class="button-group" style="margin-bottom: 35px;">
             <button class="btn-validate btn-grave" onclick="validateGraveyardPartA()">Bury All Mistakes</button>
             <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_a')">Show/Hide Answers</button>
@@ -828,7 +820,6 @@
             <strong>Part A (Collocations Key):</strong> 1. make | 2. do | 3. make | 4. do | 5. make | 6. do | 7. makes | 8. do | 9. make | 10. do
         </div>
 
-        <!-- PART B: PRO-CLAUSE SUBSTITUTION -->
         <h3 class="grave-sub-header">Part B: Pro-Clause Substitution ("So" / "Not")</h3>
         <div class="graveyard-explanation">
             <strong>The Logic:</strong> Avoid translating structures directly from Spanish (e.g., <em>Creo que sí / Espero que no</em>). 
@@ -958,7 +949,6 @@
             </div>
         </div>
 
-        <!-- Verification Unit for Part B based on image_c351a0.png layout -->
         <div class="button-group" style="margin-bottom: 35px;">
             <button class="btn-validate btn-grave" onclick="validateGraveyardPartB()">Bury All Mistakes</button>
             <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_b')">Show/Hide Answers</button>
@@ -967,53 +957,45 @@
             <strong>Part B (Pro-Clauses Key):</strong> 1. think | 2. fear | 3. expect | 4. hope | 5. believe | 6. suppose | 7. imagine | 8. trust | 9. think | 10. hope
         </div>
 
-        <!-- PART C: PRONUNCIATION OF REGULAR -ED ENDINGS -->
         <h3 class="grave-sub-header">Part C: The Pronunciation Sorting Board (-ed Endings)</h3>
         <div class="graveyard-explanation">
             <strong>The Phonetic Engine Rulebook:</strong> Do not add artificial extra syllables. 
             <br>• <strong>/t/ sound:</strong> After unvoiced vocal sounds (k, p, s, ch, sh, f). *No extra syllable.*
             <br>• <strong>/d/ sound:</strong> After voiced vocal sounds (l, n, r, v, z, b, g) or vowels. *No extra syllable.*
             <br>• <strong>/ɪd/ sound:</strong> ONLY after native <strong>T</strong> or <strong>D</strong> root sounds. *Adds an extra syllable.*
-            <br><br><em>Click the anchor audio icon in each column header to hear the reference sound standard before dragging.</em>
+            <br><br><em>Click the anchor audio icon in each column header to stream natural British English synthesised pronunciation before sorting.</em>
         </div>
 
-        <!-- Draggable Tokens Master Deck Pool Container -->
         <div style="font-weight: bold; margin-bottom: 6px; color: var(--grave-dark);">Unsorted Regular Verbs Deck:</div>
         <div id="master_verb_pool" class="drag-pool-container" ondragover="allowDropElement(event)" ondrop="dropElement(event, 'master_verb_pool')">
-            <!-- Tokens injected dynamically via script below -->
-        </div>
+            </div>
 
-        <!-- Interactive Grid Sorting Columns Map Layout -->
         <div class="board-layout">
-            <!-- COLUMN 1: /t/ -->
             <div class="board-column" id="col_t" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_t')">
                 <div class="column-header-block">
                     <h4>Column /t/</h4>
-                    <button class="audio-control-btn" onclick="playReferenceAudio('t')">🔊 Listen: "Worked"</button>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('Worked')">🔊 Listen: "Worked"</button>
                 </div>
                 <div class="drop-zone-landing" id="landing_t"></div>
             </div>
 
-            <!-- COLUMN 2: /d/ -->
             <div class="board-column" id="col_d" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_d')">
                 <div class="column-header-block">
                     <h4>Column /d/</h4>
-                    <button class="audio-control-btn" onclick="playReferenceAudio('d')">🔊 Listen: "Lived"</button>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('Lived')">🔊 Listen: "Lived"</button>
                 </div>
                 <div class="drop-zone-landing" id="landing_d"></div>
             </div>
 
-            <!-- COLUMN 3: /ɪd/ -->
             <div class="board-column" id="col_id" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_id')">
                 <div class="column-header-block">
                     <h4>Column /ɪd/</h4>
-                    <button class="audio-control-btn" onclick="playReferenceAudio('id')">🔊 Listen: "Visited"</button>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('Visited')">🔊 Listen: "Visited"</button>
                 </div>
                 <div class="drop-zone-landing" id="landing_id"></div>
             </div>
         </div>
 
-        <!-- Verification Unit for Part C based on image_c351a0.png layout -->
         <div class="button-group">
             <button class="btn-validate btn-grave" onclick="validateGraveyardPartC()">Bury Pronunciation Mistakes</button>
             <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_c')">Show/Hide Answers</button>
@@ -1036,10 +1018,9 @@
         activity3: {},
         graveyard: {},
         graveyardSo: {},
-        graveyardBoard: {} // Preserves dropped element mappings
+        graveyardBoard: {} 
     };
 
-    // Structural initialization loops
     if (!progressState.graveyard) progressState.graveyard = {};
     if (!progressState.graveyardSo) progressState.graveyardSo = {};
     if (!progressState.graveyardBoard) progressState.graveyardBoard = {};
@@ -1048,7 +1029,6 @@
         localStorage.setItem(STORAGE_KEY_MKL, JSON.stringify(progressState));
     }
 
-    // Dynamic Tab Navigation Controller 
     function switchTabs(targetTabId, clickedBtnId) {
         const modules = document.getElementsByClassName('tab-content');
         for (let i = 0; i < modules.length; i++) {
@@ -1062,7 +1042,6 @@
         document.getElementById(clickedBtnId).classList.add('active-tab');
     }
 
-    // State preservation listeners
     function saveActivity1(scenarioId, checkedIndex) {
         progressState.activity1['resp_' + scenarioId] = checkedIndex;
         saveToDisk();
@@ -1078,7 +1057,6 @@
         saveToDisk();
     }
 
-    // Graveyard Local State Persist Drivers
     function saveGrave(selectId) {
         progressState.graveyard[selectId] = document.getElementById(selectId).value;
         saveToDisk();
@@ -1123,28 +1101,25 @@
         { id: 'v30', text: 'Conducted', target: 'col_id' }
     ];
 
-    // Reference Audio Synthesis Driver Mapping API
-    function playReferenceAudio(typeKey) {
-        let textTarget = "";
-        if (typeKey === 't') textTarget = "worked";
-        if (typeKey === 'd') textTarget = "lived";
-        if (typeKey === 'id') textTarget = "visited";
-        
+    /* Native Web Speech Synthesis Engine running en-GB */
+    function playReferenceAudio(wordToSpeak) {
         if ('speechSynthesis' in window) {
+            // Cancel current ongoing sound pipelines
             window.speechSynthesis.cancel();
-            let utterance = new SpeechSynthesisUtterance(textTarget);
+            
+            const utterance = new SpeechSynthesisUtterance(wordToSpeak);
             utterance.lang = 'en-GB';
-            utterance.rate = 0.85; 
+            utterance.rate = 0.85; // Slightly slower pacing for cleaner phonetic clarity
+            
             window.speechSynthesis.speak(utterance);
         } else {
-            alert("Speech engine error. Please check browser configuration constraints.");
+            alert("Your browser does not support Speech Synthesis. Please use a modern browser.");
         }
     }
 
     function initPronunciationBoard() {
         const pool = document.getElementById('master_verb_pool');
         
-        // Render or assign storage targets mapping allocations
         verbMasterData.forEach(verb => {
             const token = document.createElement('div');
             token.className = 'draggable-verb-token';
@@ -1156,7 +1131,11 @@
                 e.dataTransfer.setData('text/plain', token.id);
             });
 
-            // Check if prior local coordinate mapping exists
+            // Double click token feature so individual choices can also be enunciated in en-GB
+            token.addEventListener('dblclick', () => {
+                playReferenceAudio(verb.text);
+            });
+
             const savedLandingId = progressState.graveyardBoard[verb.id];
             if (savedLandingId && savedLandingId !== 'master_verb_pool') {
                 const zone = document.getElementById(savedLandingId.replace('col_', 'landing_'));
@@ -1180,7 +1159,6 @@
         const tokenNode = document.getElementById(tokenId);
         if (!tokenNode) return;
 
-        // Reset state indicator flags during repositioning cycles
         tokenNode.classList.remove('token-correct', 'token-incorrect');
 
         if (targetContainerId === 'master_verb_pool') {
@@ -1196,39 +1174,31 @@
         saveToDisk();
     }
 
-    // Application state loading engine
     window.onload = function() {
-        // Restore Activity 1
         for (let key in progressState.activity1) {
             const val = progressState.activity1[key];
             const radio = document.querySelector(`input[name="${key}"][value="${val}"]`);
             if (radio) radio.checked = true;
         }
-        // Restore Activity 2
         for (let id in progressState.activity2) {
             const el = document.getElementById(id);
             if (el) el.value = progressState.activity2[id];
         }
-        // Restore Activity 3
         for (let id in progressState.activity3) {
             const el = document.getElementById(id);
             if (el) el.value = progressState.activity3[id];
         }
-        // Restore Graveyard Part A
         for (let id in progressState.graveyard) {
             const el = document.getElementById(id);
             if (el) el.value = progressState.graveyard[id];
         }
-        // Restore Graveyard Part B
         for (let id in progressState.graveyardSo) {
             const el = document.getElementById(id);
             if (el) el.value = progressState.graveyardSo[id];
         }
-        // Run Part C Sorting Engine Initialization
         initPronunciationBoard();
     };
 
-    // Evaluation framework validation engines
     function validateActivity2() {
         let score = 0; const total = 21;
         for (let i = 1; i <= total; i++) {
@@ -1264,7 +1234,6 @@
         alert('Activity 3 Evaluation complete! Score: ' + scoredCorrect + ' / ' + Object.keys(structuralMap).length);
     }
 
-    // Isolated Graveyard Part A Validation Logic
     function validateGraveyardPartA() {
         const partAKey = {
             'grave_1': 'make', 'grave_2': 'do', 'grave_3': 'make', 'grave_4': 'do', 'grave_5': 'make',
@@ -1284,7 +1253,6 @@
         alert('Graveyard Part A Evaluation complete! ' + scoreA + ' / 10 collocations laid to rest.');
     }
 
-    // Isolated Graveyard Part B Validation Logic
     function validateGraveyardPartB() {
         const partBKey = {
             'grave_so_1': 'think', 'grave_so_2': 'fear', 'grave_so_3': 'expect', 'grave_so_4': 'hope', 'grave_so_5': 'believe',
@@ -1304,7 +1272,6 @@
         alert('Graveyard Part B Evaluation complete! ' + scoreB + ' / 10 pro-clauses laid to rest.');
     }
 
-    // Isolated Graveyard Part C Evaluation Framework Logic
     function validateGraveyardPartC() {
         let scoredCorrect = 0;
         let elementsEvaluatedCount = 0;
