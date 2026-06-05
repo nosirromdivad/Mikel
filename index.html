@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIKEL - ENGLISH 2.0</title>
+<style>
+:root{--pg:#6b8f71;--pl:#f4f7f5;--bd:#5c7f91;--bl:#f0f4f8;--ol:#fdf5e6;--od:#c68a4c;--bg:#f9fbf9;--tx:#334155;--br:#cbd5e1;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);margin:0;padding:20px;font-size:17px;}
+.container{max-width:960px;margin:0 auto;}
+header{background:linear-gradient(135deg,#b7e4c7,#94d2bd);color:#1b4332;padding:25px;border-radius:16px;margin-bottom:25px;text-align:center;}
+header h1{margin:0;font-size:26px;}
+.hdate{font-size:15px;font-weight:500;color:#2d6a4f;margin-top:5px;}
+.sec-title{color:#2d6a4f;border-bottom:2px solid #b7e4c7;padding-bottom:8px;margin-top:35px;font-size:21px;}
+.act-instr{font-size:16px;color:#64748b;margin-bottom:18px;}
+.card{background:#fff;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 5px rgba(0,0,0,.04);border:1px solid #e2e8f0;}
+.card-title{font-weight:bold;font-size:17px;color:#1b4332;display:block;margin-bottom:10px;}
+.card-body{font-size:16px;line-height:1.7;color:#475569;background:var(--pl);padding:12px;border-radius:6px;margin-bottom:15px;}
+.resp-box{background:#fff;border:1px dashed var(--bd);padding:15px;border-radius:8px;margin-top:10px;}
+.resp-opt{margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.5;}
+.resp-opt input{margin-top:3px;flex-shrink:0;}
+.pv-table{width:100%;border-collapse:collapse;margin-top:15px;background:#fff;border-radius:8px;overflow:hidden;}
+.pv-table th,.pv-table td{padding:13px;text-align:left;border-bottom:1px solid #e2e8f0;font-size:15px;}
+.pv-table th{background:var(--bl);color:var(--bd);}
+select.ex{padding:9px;border-radius:6px;border:1px solid var(--br);width:100%;background:#fff;font-size:15px;transition:background .2s,border-color .2s;}
+.btn-row{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap;}
+.btn-green{background:var(--pg);color:#fff;border:none;padding:12px 24px;font-size:15px;border-radius:8px;cursor:pointer;font-weight:bold;}
+.btn-grey{background:#64748b;color:#fff;border:none;padding:12px 24px;font-size:15px;border-radius:8px;cursor:pointer;font-weight:bold;}
+.btn-green:hover,.btn-grey:hover{opacity:.88;}
+.ans-key{display:none;margin-top:15px;padding:16px;background:var(--ol);border-left:5px solid var(--od);border-radius:6px;font-size:15px;line-height:1.7;}
+.hint{display:none;margin-top:10px;padding:9px 14px;background:#fdf5e6;border-left:4px solid var(--od);border-radius:6px;font-size:14px;color:#7a4a00;}
+
+/* MAIN TABS */
+.tab-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;border-bottom:2px solid #b7e4c7;padding-bottom:0;}
+.tab-btn{background:#fff;border:1px solid #cbd5e1;border-bottom:none;padding:11px 24px;border-radius:8px 8px 0 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--tx);position:relative;bottom:-2px;transition:background .2s;}
+.tab-btn:hover{background:#f0faf3;color:#1b4332;}
+.tab-btn.active{background:linear-gradient(135deg,#b7e4c7,#94d2bd);color:#1b4332;border-color:#b7e4c7;}
+.tab-btn.gtab.active{background:linear-gradient(135deg,#2d2d2d,#4a3a4a);color:#e8d5b7;border-color:#4a3a4a;}
+.panel{display:none;}.panel.active{display:block;}
+
+/* GRAVEYARD */
+.grave-hdr{background:linear-gradient(135deg,#2d2d2d,#4a3a4a);color:#e8d5b7;padding:25px;border-radius:16px;margin-bottom:24px;text-align:center;}
+.grave-hdr h2{margin:0;font-size:24px;}
+.grave-hdr p{margin:8px 0 0;font-size:14px;color:#c9b8a8;}
+.g-tab-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.g-tab-btn{background:#3a3a4a;color:#e8d5b7;border:1px solid #5a4a6a;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:background .2s;}
+.g-tab-btn:hover{background:#4a4a5a;}
+.g-tab-btn.active{background:linear-gradient(135deg,#6b8f71,#4a7a5a);color:#fff;border-color:#6b8f71;}
+.g-panel{display:none;}.g-panel.active{display:block;}
+.g-intro{background:#3a3a4a;border-radius:12px;padding:20px;margin-bottom:22px;color:#e8d5b7;font-size:15px;line-height:1.7;}
+.g-intro h3{margin:0 0 14px;font-size:18px;color:#b7e4c7;}
+.rule{background:#2d2d2d;border-radius:8px;padding:12px 16px;margin:10px 0;border-left:4px solid #6b8f71;}
+.rule strong{color:#94d2bd;}
+.exbox{margin-top:12px;padding:10px 14px;background:#2d2d2d;border-radius:8px;border-left:4px solid var(--od);font-size:14px;color:#f0e6d0;}
+.exbox div{margin:4px 0;}
+.g-item{background:#fff;border-radius:10px;padding:18px;margin-bottom:16px;border:1px solid #e2e8f0;}
+.g-item p{font-size:16px;margin:0 0 10px;line-height:1.6;}
+select.gex{padding:9px;border-radius:6px;border:1px solid #cbd5e1;font-size:15px;background:#fff;min-width:160px;transition:background .2s,border-color .2s;}
+.btn-dark{background:linear-gradient(135deg,#2d2d2d,#4a3a4a);color:#e8d5b7;border:none;padding:12px 26px;font-size:15px;border-radius:8px;cursor:pointer;font-weight:bold;}
+.btn-dark:hover{opacity:.85;}
+.g-key{display:none;margin-top:16px;padding:16px;background:#1f1f2e;border-left:5px solid #6b8f71;border-radius:8px;font-size:14px;line-height:1.8;color:#d4e8d0;}
+.g-key strong{color:#94d2bd;}
+
+/* PRONUNCIATION */
+.pron-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;}
+.pron-card{border-radius:10px;padding:14px;text-align:center;}
+.pron-card.tc{background:#d4edda;border:2px solid #6b8f71;color:#155724;}
+.pron-card.dc{background:#cce5ff;border:2px solid #5c7f91;color:#004085;}
+.pron-card.ic{background:#fff3cd;border:2px solid var(--od);color:#856404;}
+.pron-sym{font-size:28px;font-weight:800;display:block;margin-bottom:6px;}
+.pron-txt{font-size:13px;line-height:1.5;margin-bottom:10px;}
+.spk{background:transparent;border:none;font-size:17px;cursor:pointer;padding:4px 8px;border-radius:6px;display:block;margin:4px auto;}
+.spk:hover{background:rgba(0,0,0,.08);}
+.r-btn-nav{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.r-panel{display:none;}.r-panel.active{display:block;}
+.r-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;}
+.r-hdr h3{margin:0;font-size:18px;color:#2d2d2d;}
+.btn-reset{background:#64748b;color:#fff;border:none;padding:10px 18px;font-size:14px;border-radius:8px;cursor:pointer;font-weight:bold;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:14px;background:#f1f5f9;border-radius:10px;}
+.chip-wrap{display:flex;align-items:center;gap:4px;}
+.chip{background:#fff;border:1.5px solid #94a3b8;border-radius:20px;padding:8px 14px;font-size:15px;font-weight:600;cursor:pointer;color:#334155;user-select:none;transition:background .15s,border-color .15s;}
+.chip:hover{background:#e2e8f0;}
+.chip.sel{outline:2px solid var(--bd);outline-offset:2px;}
+.chip.placed{opacity:.28;pointer-events:none;}
+.sort-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.scol{border-radius:10px;padding:12px;min-height:100px;cursor:pointer;}
+.scol.tc{background:#f4fff7;border:2px solid #6b8f71;}
+.scol.dc{background:#f0f7ff;border:2px solid #5c7f91;}
+.scol.ic{background:#fffdf0;border:2px solid var(--od);}
+.col-lbl{font-size:22px;font-weight:800;text-align:center;margin-bottom:8px;}
+.scol.tc .col-lbl{color:#155724;}
+.scol.dc .col-lbl{color:#004085;}
+.scol.ic .col-lbl{color:#856404;}
+.drop-zone{min-height:60px;display:flex;flex-direction:column;gap:6px;}
+.dchip{background:#fff;border-radius:16px;padding:6px 12px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;width:fit-content;transition:opacity .15s;}
+.dchip:hover{opacity:.6;}
+.sfb{margin-top:12px;font-size:15px;padding:12px 16px;border-radius:8px;display:none;}
+.sfb.ok{background:#d4edda;color:#155724;border-left:4px solid #6b8f71;}
+.sfb.part{background:#fff3cd;color:#856404;border-left:4px solid var(--od);}
+@media(max-width:600px){.sort-cols,.pron-grid,.r-btn-nav{grid-template-columns:1fr;flex-direction:column;}}
+</style>
+</head>
+<body>
+<div class="container">
+<header><h1>MIKEL - ENGLISH 2.0</h1><div class="hdate">June 4, 2026</div></header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('main',this)">Main Activities</button>
+  <button class="tab-btn gtab" onclick="showTab('grave',this)">The Graveyard &#x1F480;</button>
+</nav>
+
+<!-- ═══ MAIN PANEL ═══ -->
+<div id="main" class="panel active">
+
+<h2 class="sec-title">Activity 1</h2>
+<p class="act-instr">Read each scenario and choose your response. Your choices are automatically saved.</p>
+
+<div class="card"><span class="card-title">1. The polished chapter</span>
+<div class="card-body">A doctoral student you have supervised for three years submits a chapter of disquieting accomplishment. A close reading leads you to a near-certain conclusion: she has <strong>passed off</strong> substantial passages from an obscure monograph as her own thinking, confident no detection algorithm will <strong>flag up</strong> a source it has never encountered. The plagiarism is systematic enough to rule out negligence, yet not demonstrable enough to <strong>hold up</strong> before a tribunal lacking your specialist knowledge. Exposing her ends her career. Saying nothing makes you party to a deception that could <strong>unravel</strong> at any point over the next thirty years.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r1" value="0" onchange="saveA1(1,0)"> Pass the issue straight to the academic integrity committee and let the official machinery take its course, even if it ends her career.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r1" value="1" onchange="saveA1(1,1)"> Order a double espresso and look out the window. If the administrative machine can't catch it, maybe thirty years of dynamic career anxiety is just a built-in feature of modern supervision.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r1" value="2" onchange="saveA1(1,2)"> Call her in for a private, direct chat and offer a clean slate to completely rewrite the chapter under your strict watch without involving the committee.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">2. The dominant seminar voice</span>
+<div class="card-body">A student of exceptional ability has <strong>crowded out</strong> the rest of the seminar. Participation has <strong>levelled off</strong> at three or four voices. A pattern is <strong>playing out</strong> that you recognise from faculty committees: the silent majority's written work is beginning to suffer. The dynamic <strong>cuts across</strong> the whole cohort. Intervening risks pathologising what makes him exceptional; not intervening normalises a conversational structure some students will <strong>carry over</strong> into their own careers.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r2" value="0" onchange="saveA1(2,0)"> Let him run the entire hour. If the rest of the cohort settles into total silence, I can use the extra mental bandwidth to finish editing my department budget before noon.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r2" value="1" onchange="saveA1(2,1)"> Change the setup and use strictly timed breakout groups to physically stop one person from taking over the whole session.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r2" value="2" onchange="saveA1(2,2)"> Talk to him in private, tell him he's brilliant, but explicitly ask him to hold back so the quieter students have room to breathe.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">3. The grade appeal</span>
+<div class="card-body">A student lodges a formal appeal you initially dismissed as tactical. Re-reading without marking fatigue, you <strong>tease out</strong> a counter-argument that is genuinely more sophisticated than you credited. Revising upward <strong>throws up</strong> a structural problem: four other students received identical marks. Whether your original assessment would <strong>hold up</strong> under external moderation is uncomfortable to consider. Revising opens a cascade; not revising requires you to <strong>stand by</strong> a judgement you can no longer <strong>stand by</strong>.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r3" value="0" onchange="saveA1(3,0)"> Be upfront about it — fix the student's grade and quietly get the other four similar submissions looked at again without anyone knowing whose work is whose.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r3" value="1" onchange="saveA1(3,1)"> Close the laptop and stand by the coffee maker. I am officially too tired to discover hidden structural genius in messy late-night essays.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r3" value="2" onchange="saveA1(3,2)"> Turn down the appeal on fairness grounds, but sit down with the student and give them real, useful guidance for what's coming next.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">4. The fabricated data</span>
+<div class="card-body">Reviewing a pre-print by the colleague who secured your tenure, you notice a statistical anomaly that is almost certainly deliberate. The research underpins two ongoing clinical trials. <strong>Flagging up</strong> your concerns means bringing down not only a career but an entire line of inquiry. Staying silent is collusion you could not <strong>ride out</strong> if the fabrication surfaces independently, as it almost certainly will.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r4" value="0" onchange="saveA1(4,0)"> Clear the browser history and convince myself that "statistical fabrication" is just an incredibly bold, artistic interpretation of empirical data.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r4" value="1" onchange="saveA1(4,1)"> Confront them behind closed doors and give them a short deadline to withdraw the paper or report the anomaly before you do it for them.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r4" value="2" onchange="saveA1(4,2)"> Drop an anonymous, highly detailed technical breakdown directly on the research integrity director's desk and walk away completely.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">5. The viral clip</span>
+<div class="card-body">A deliberately provocative remark — understood as irony by everyone present — has been stripped of context and posted online. The communications office urges you to put out a statement. Any public response risks amplifying the story; a clumsy apology may be read as an admission. The alternative is to <strong>sit it out</strong>. What you cannot <strong>factor in</strong> is whether silence will be construed as confirmation.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r5" value="0" onchange="saveA1(5,0)"> Post a short, factual statement explaining the actual academic context of the seminar without sounding defensive or apologetic.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r5" value="1" onchange="saveA1(5,1)"> Do exactly what the PR team says: lay low, keep completely quiet, and wait for the internet mob to find something else to look at.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r5" value="2" onchange="saveA1(5,2)"> Turn off the phone and leave the country. If the internet believes I'm a monster, I might as well enjoy a quiet weekend off the grid.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">6. The mature student</span>
+<div class="card-body">A student who spent twenty years in senior risk management cannot convert experiential intelligence into academic currency. He resists every overture of support. You could <strong>map out</strong> a tailored remediation path — but without his consent it risks compounding the very humiliation holding him back. Leaving him to his own devices — <strong>writing him off</strong>, in effect — wastes someone who could produce original work by <strong>drawing on</strong> a practitioner's perspective none of his peers can replicate.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r6" value="0" onchange="saveA1(6,0)"> Change how you offer help: ask him to lead a seminar session on real-world risk, and use that as a back door to teach him the academic theory.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r6" value="1" onchange="saveA1(6,1)"> Give up on the customised strategic roadmap. If someone with two decades of corporate leadership wants to fail out of pride, I'm not going to force an intervention.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r6" value="2" onchange="saveA1(6,2)"> Make the extra guidance steps mandatory for the entire group so he doesn't feel singled out.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">7. The research grant</span>
+<div class="card-body">A leading asset management firm offers to fund a five-year research programme. One clause grants the sponsor the right to <strong>sit on</strong> any findings it deems commercially sensitive for an indefinite period. You have <strong>weighed up</strong> the alternatives. Accepting means producing work that may never reach publication. Declining means <strong>winding up</strong> the most significant empirical project of your career. The arrangement is being <strong>glossed over</strong> in departmental communications as a standard data-access partnership. It is not.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r7" value="0" onchange="saveA1(7,0)"> Take the massive endowment, approve the restrictive clause, and order premium office chairs.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r7" value="1" onchange="saveA1(7,1)"> Say no to the money immediately to protect your academic freedom, even if it means putting the brakes on your biggest data project.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r7" value="2" onchange="saveA1(7,2)"> Push back on the clause and insist on a strict 12-month maximum delay rule instead of an open-ended restriction.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">8. The undocumented extension</span>
+<div class="card-body">A student requests a compassionate extension she finds credible but will not document through the welfare process, claiming it would compound her distress. Granting an undocumented exception sets a precedent you cannot <strong>walk back</strong>. Refusing requires you to <strong>see through</strong> a decision whose practical effects you consider disproportionate.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r8" value="0" onchange="saveA1(8,0)"> Give her a few extra days off the record, but handle the paperwork directly with the welfare team behind the scenes.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r8" value="1" onchange="saveA1(8,1)"> Stick strictly to the rulebook, deny the extension until she uploads the official forms, and keep the playing field level for everyone.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r8" value="2" onchange="saveA1(8,2)"> Grant the exception immediately to avoid the cold bureaucratic conflict, then brace myself for the flood of identical undocumented requests next Friday.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">9. The walkout</span>
+<div class="card-body">A third of your students have walked out in protest against a university policy you privately consider indefensible. The departmental line treats this as a disciplinary matter. You are unwilling to <strong>go along with</strong> that framing, which would require you to <strong>call out</strong> behaviour you consider justified. <strong>Papering over</strong> the genuine grievance feels dishonest; staying silent <strong>plays into</strong> the hands of those claiming the walkout was tacitly approved.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r9" value="0" onchange="saveA1(9,0)"> Turn the policy issue into an immediate open debate at the start of class, validating their frustration without breaking official staff rules.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r9" value="1" onchange="saveA1(9,1)"> Pack up my notes, walk straight out the back door behind the protesters.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r9" value="2" onchange="saveA1(9,2)"> Keep your head down, ignore the empty chairs, and go straight into the planned lecture slides to protect the time of those who stayed.</label></div>
+</div></div>
+
+<div class="card"><span class="card-title">10. The deteriorating candidate</span>
+<div class="card-body">Your most promising doctoral candidate, months from submission, is showing signs you can no longer <strong>gloss over</strong>: unworkable timelines, erratic communication, analytical capacity <strong>breaking down</strong> under pressure she refuses to name. Every attempt to open a conversation is <strong>brushed off</strong>. Your instinct is to <strong>step in</strong>. The institution has failed to <strong>flesh out</strong> its guidance on what that would mean legally or ethically.</div>
+<div class="resp-box">
+<div class="resp-opt"><label><input type="radio" name="r10" value="0" onchange="saveA1(10,0)"> Step in completely unprompted, rewrite her flawed data analysis myself over the weekend, and agree to never mention the intervention again.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r10" value="1" onchange="saveA1(10,1)"> Call an official meeting focused entirely on scheduling and structural milestones, giving her a safe professional angle to adjust without forcing a personal confession.</label></div>
+<div class="resp-opt"><label><input type="radio" name="r10" value="2" onchange="saveA1(10,2)"> Officially flag the situation to the university student support office to make sure professional therapists step in.</label></div>
+</div></div>
+
+<div class="btn-row"><button class="btn-green" onclick="alert('Answers saved!')">Save Answers</button></div>
+
+<!-- ACTIVITY 2 -->
+<h2 class="sec-title">Activity 2</h2>
+<p class="act-instr">Match each phrasal verb to its precise definition.</p>
+<table class="pv-table"><thead><tr><th>Phrasal Verb</th><th>Definition</th></tr></thead><tbody>
+<tr><td><strong>pass off (as)</strong></td><td><select id="c1" class="ex" onchange="sv('c1')"><option value="">-- Choose --</option><option value="ok">Present something false as genuine</option><option value="w1">Hand over control without signature</option><option value="w2">Systematically ignore an official report</option></select></td></tr>
+<tr><td><strong>flag up</strong></td><td><select id="c2" class="ex" onchange="sv('c2')"><option value="">-- Choose --</option><option value="ok">Draw urgent attention to a risk or problem</option><option value="w1">Celebrate a major organisational achievement</option><option value="w2">Mark the boundary of an asset zone</option></select></td></tr>
+<tr><td><strong>hold up</strong></td><td><select id="c3" class="ex" onchange="sv('c3')"><option value="">-- Choose --</option><option value="ok">Remain valid when examined closely</option><option value="w1">Delay a corporate process intentionally</option><option value="w2">Structure a dynamic defence argument</option></select></td></tr>
+<tr><td><strong>unravel</strong></td><td><select id="c4" class="ex" onchange="sv('c4')"><option value="">-- Choose --</option><option value="ok">Come apart gradually, exposing underlying flaws</option><option value="w1">Make a direct final decision</option><option value="w2">Obscure a fact using complex wording</option></select></td></tr>
+<tr><td><strong>crowd out</strong></td><td><select id="c5" class="ex" onchange="sv('c5')"><option value="">-- Choose --</option><option value="ok">Displace by occupying all available space or attention</option><option value="w1">Join a larger social gathering</option><option value="w2">Physically move out of a restricted area</option></select></td></tr>
+<tr><td><strong>level off</strong></td><td><select id="c6" class="ex" onchange="sv('c6')"><option value="">-- Choose --</option><option value="ok">Stabilise after a period of change</option><option value="w1">Balance opposing financial ledgers</option><option value="w2">Diminish or lose value completely</option></select></td></tr>
+<tr><td><strong>play out</strong></td><td><select id="c7" class="ex" onchange="sv('c7')"><option value="">-- Choose --</option><option value="ok">Develop or unfold in a particular way</option><option value="w1">Perform a rehearsed simulation</option><option value="w2">Become obsolete or exhausted</option></select></td></tr>
+<tr><td><strong>cut across</strong></td><td><select id="c8" class="ex" onchange="sv('c8')"><option value="">-- Choose --</option><option value="ok">Apply to or affect multiple distinct groups</option><option value="w1">Interrupt a speaker aggressively</option><option value="w2">Reduce expenditures across the board</option></select></td></tr>
+<tr><td><strong>carry over</strong></td><td><select id="c9" class="ex" onchange="sv('c9')"><option value="">-- Choose --</option><option value="ok">Transfer a pattern or behaviour into a new context</option><option value="w1">Win an argument after extended debate</option><option value="w2">Store surplus materials for future options</option></select></td></tr>
+<tr><td><strong>tease out</strong></td><td><select id="c10" class="ex" onchange="sv('c10')"><option value="">-- Choose --</option><option value="ok">Identify something subtle through careful analysis</option><option value="w1">Mock an unverified thesis statement</option><option value="w2">Remove errors from a raw dataset</option></select></td></tr>
+<tr><td><strong>throw up</strong></td><td><select id="c11" class="ex" onchange="sv('c11')"><option value="">-- Choose --</option><option value="ok">Generate or produce (problems, questions)</option><option value="w1">Discard outdated operational standards</option><option value="w2">Elevate an individual's title quickly</option></select></td></tr>
+<tr><td><strong>stand by</strong></td><td><select id="c12" class="ex" onchange="sv('c12')"><option value="">-- Choose --</option><option value="ok">Continue to uphold a position or decision</option><option value="w1">Watch passively without offering help</option><option value="w2">Prepare resources for imminent deployment</option></select></td></tr>
+<tr><td><strong>ride out</strong></td><td><select id="c13" class="ex" onchange="sv('c13')"><option value="">-- Choose --</option><option value="ok">Endure a difficult period until it passes</option><option value="w1">Travel away from a central conflict zone</option><option value="w2">Minimise risks using complex insurance structures</option></select></td></tr>
+<tr><td><strong>sit out</strong></td><td><select id="c14" class="ex" onchange="sv('c14')"><option value="">-- Choose --</option><option value="ok">Wait passively without acting until something is over</option><option value="w1">Resign formally from an advisory committee</option><option value="w2">Protest a rule by staying outside the room</option></select></td></tr>
+<tr><td><strong>factor in</strong></td><td><select id="c15" class="ex" onchange="sv('c15')"><option value="">-- Choose --</option><option value="ok">Include something in reasoning or calculation</option><option value="w1">Break down a sum into modular parts</option><option value="w2">Delegate structural tasks to a provider</option></select></td></tr>
+<tr><td><strong>map out</strong></td><td><select id="c16" class="ex" onchange="sv('c16')"><option value="">-- Choose --</option><option value="ok">Plan or describe in systematic, deliberate detail</option><option value="w1">Chart geographical asset distributions</option><option value="w2">Locate the root source of an operation</option></select></td></tr>
+<tr><td><strong>write off</strong></td><td><select id="c17" class="ex" onchange="sv('c17')"><option value="">-- Choose --</option><option value="ok">Dismiss as beyond recovery; record a loss</option><option value="w1">Document an official complaint text</option><option value="w2">Sign off on a finalised corporate budget</option></select></td></tr>
+<tr><td><strong>draw on</strong></td><td><select id="c18" class="ex" onchange="sv('c18')"><option value="">-- Choose --</option><option value="ok">Use a resource, experience, or skill actively</option><option value="w1">Extend an argument past its objective limit</option><option value="w2">Frame a visual timeline for reference</option></select></td></tr>
+<tr><td><strong>sit on</strong></td><td><select id="c19" class="ex" onchange="sv('c19')"><option value="">-- Choose --</option><option value="ok">Deliberately delay or suppress information</option><option value="w1">Supervise a specialised workspace actively</option><option value="w2">Occupy a position of seniority within a firm</option></select></td></tr>
+<tr><td><strong>weigh up</strong></td><td><select id="c20" class="ex" onchange="sv('c20')"><option value="">-- Choose --</option><option value="ok">Carefully consider competing factors</option><option value="w1">Calculate physical shipping units</option><option value="w2">Escalate an issue past standard review</option></select></td></tr>
+<tr><td><strong>wind up</strong></td><td><select id="c21" class="ex" onchange="sv('c21')"><option value="">-- Choose --</option><option value="ok">Bring to a close; terminate</option><option value="w1">Initiate a high-level research project</option><option value="w2">Complicate a simple procedural matter</option></select></td></tr>
+<tr><td><strong>gloss over</strong></td><td><select id="c22" class="ex" onchange="sv('c22')"><option value="">-- Choose --</option><option value="ok">Pass over quickly to avoid scrutiny</option><option value="w1">Provide a shiny surface polish or finish</option><option value="w2">Elaborate in deep technical language</option></select></td></tr>
+<tr><td><strong>walk back</strong></td><td><select id="c23" class="ex" onchange="sv('c23')"><option value="">-- Choose --</option><option value="ok">Retract or soften a previous position</option><option value="w1">Trace an analytical path to its origin</option><option value="w2">Exit an ongoing negotiation quietly</option></select></td></tr>
+<tr><td><strong>see through</strong></td><td><select id="c24" class="ex" onchange="sv('c24')"><option value="">-- Choose --</option><option value="ok">Complete despite difficulty; or: not be deceived by</option><option value="w1">Examine transparent physical components</option><option value="w2">Monitor a transaction profile carefully</option></select></td></tr>
+<tr><td><strong>go along with</strong></td><td><select id="c25" class="ex" onchange="sv('c25')"><option value="">-- Choose --</option><option value="ok">Accept or agree without strong conviction</option><option value="w1">Accompany a colleague during a trip</option><option value="w2">Match the performance profile of peers</option></select></td></tr>
+<tr><td><strong>call out</strong></td><td><select id="c26" class="ex" onchange="sv('c26')"><option value="">-- Choose --</option><option value="ok">Publicly identify and challenge problematic behaviour</option><option value="w1">Summon an external service team</option><option value="w2">State a legal name during a roll call</option></select></td></tr>
+<tr><td><strong>paper over</strong></td><td><select id="c27" class="ex" onchange="sv('c27')"><option value="">-- Choose --</option><option value="ok">Conceal a problem while creating appearance of resolution</option><option value="w1">Execute a massive printing task</option><option value="w2">Switch from digital to physical documents</option></select></td></tr>
+<tr><td><strong>play into</strong></td><td><select id="c28" class="ex" onchange="sv('c28')"><option value="">-- Choose --</option><option value="ok">Inadvertently serve someone else's interests or narrative</option><option value="w1">Engage actively in a professional dynamic</option><option value="w2">Join an ongoing debate without preparation</option></select></td></tr>
+<tr><td><strong>break down</strong></td><td><select id="c29" class="ex" onchange="sv('c29')"><option value="">-- Choose --</option><option value="ok">Cease to function; or: become emotionally overwhelmed</option><option value="w1">Partition an allocation into separate funds</option><option value="w2">Reduce a compound to its base molecules</option></select></td></tr>
+<tr><td><strong>brush off</strong></td><td><select id="c30" class="ex" onchange="sv('c30')"><option value="">-- Choose --</option><option value="ok">Dismiss without proper engagement</option><option value="w1">Clean up an engineering workstation</option><option value="w2">Update an obsolete theoretical design</option></select></td></tr>
+<tr><td><strong>flesh out</strong></td><td><select id="c31" class="ex" onchange="sv('c31')"><option value="">-- Choose --</option><option value="ok">Add substance and detail to something incomplete</option><option value="w1">Extract data elements from a file</option><option value="w2">Resolve a physical compliance friction</option></select></td></tr>
+<tr><td><strong>step in</strong></td><td><select id="c32" class="ex" onchange="sv('c32')"><option value="">-- Choose --</option><option value="ok">Intervene where another has failed or is unable to act</option><option value="w1">Enter a restricted structural zone</option><option value="w2">Tender a resignation from a position</option></select></td></tr>
+</tbody></table>
+<div class="btn-row">
+  <button class="btn-green" onclick="checkA2()">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('key_a2')">See Answers</button>
+</div>
+<div id="key_a2" class="ans-key">All correct answers are the <strong>first option</strong> in each dropdown. After clicking "Check your answers", correct answers highlight green and incorrect ones highlight red.</div>
+
+<!-- ACTIVITY 3 -->
+<h2 class="sec-title">Activity 3</h2>
+<p class="act-instr">Choose the most precise phrasal verb for each sentence.</p>
+
+<div class="card" style="border-left:5px solid var(--bd);">
+<p><strong>1.</strong> The audit findings had been __________ in the board presentation. No one mentioned the covenant breach.</p>
+<select id="a3_1" class="ex" onchange="sv('a3_1')"><option value="">-- Choose --</option><option value="a">glossed over</option><option value="b">papered over</option></select>
+<div class="hint" id="h3_1">Think: <em>glossed over</em> = skimmed past without scrutiny. <em>Papered over</em> = actively concealed to create a false appearance of resolution. The findings were mentioned but not examined — they were glossed over.</div>
+</div>
+<div class="card" style="border-left:5px solid var(--bd);">
+<p><strong>2.</strong> His original forecast didn't __________ once the Q3 data came in.</p>
+<select id="a3_2" class="ex" onchange="sv('a3_2')"><option value="">-- Choose --</option><option value="a">hold up</option><option value="b">bear out</option></select>
+<div class="hint" id="h3_2">The forecast itself is being tested. <em>Hold up</em> = remain valid under examination. <em>Bear out</em> = evidence confirms a claim. A theory holds up; data bears out a theory.</div>
+</div>
+<div class="card" style="border-left:5px solid var(--bd);">
+<p><strong>3.</strong> The restructuring __________ risks that hadn't appeared in the original due diligence.</p>
+<select id="a3_3" class="ex" onchange="sv('a3_3')"><option value="">-- Choose --</option><option value="a">threw up</option><option value="b">brought up</option></select>
+<div class="hint" id="h3_3"><em>Threw up</em> = generated unexpectedly (risks emerge on their own). <em>Brought up</em> = a person deliberately raises a topic in conversation.</div>
+</div>
+<div class="card" style="border-left:5px solid var(--bd);">
+<p><strong>4.</strong> The committee chose to __________ the controversy and wait for the cycle to move on.</p>
+<select id="a3_4" class="ex" onchange="sv('a3_4')"><option value="">-- Choose --</option><option value="a">ride out</option><option value="b">sit out</option></select>
+<div class="hint" id="h3_4"><em>Ride out</em> = actively endure and survive a difficult period. <em>Sit out</em> = deliberately abstain from participation. The committee is enduring it, not abstaining.</div>
+</div>
+<div class="card" style="border-left:5px solid var(--bd);">
+<p><strong>5.</strong> She __________ the criticism in the meeting without responding.</p>
+<select id="a3_5" class="ex" onchange="sv('a3_5')"><option value="">-- Choose --</option><option value="a">brushed off</option><option value="b">glossed over</option></select>
+<div class="hint" id="h3_5"><em>Brushed off</em> = dismissed a comment or person without engaging. <em>Glossed over</em> = skimmed past a topic. You brush off a remark directed at you; you gloss over a subject you're presenting.</div>
+</div>
+<div class="btn-row">
+  <button class="btn-green" onclick="checkA3()">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('key_a3')">See Answers</button>
+</div>
+<div id="key_a3" class="ans-key">
+<strong>Activity 3 answers:</strong><br><br>
+1. <strong>glossed over</strong> — The findings were skimmed past without scrutiny. "Papered over" implies total concealment.<br>
+2. <strong>hold up</strong> — The forecast itself collapsed under scrutiny. "Bear out" is used when evidence confirms a claim.<br>
+3. <strong>threw up</strong> — Risks emerged unexpectedly from the process. "Brought up" requires a person deliberately raising a topic.<br>
+4. <strong>ride out</strong> — The committee is actively enduring the controversy. "Sit out" means deliberate non-participation.<br>
+5. <strong>brushed off</strong> — She dismissed criticism directed at her. "Glossed over" applies to topics or subjects, not personal remarks.
+</div>
+
+</div><!-- /main -->
+
+<!-- ═══ GRAVEYARD PANEL ═══ -->
+<div id="grave" class="panel">
+<div class="grave-hdr">
+  <h2>&#x1F480; The Graveyard</h2>
+  <p>Where mistakes are buried — and lessons rise from the ashes.</p>
+</div>
+
+<nav class="g-tab-nav">
+  <button class="g-tab-btn active" onclick="showGTab('g1',this)">Activity 1 &mdash; Make or Do?</button>
+  <button class="g-tab-btn" onclick="showGTab('g3',this)">Activity 2 &mdash; -ed Pronunciation &#x1F50A;</button>
+</nav>
+
+<!-- ── G1: MAKE OR DO ── -->
+<div id="g1" class="g-panel active">
+<div class="g-intro">
+  <h3>&#x1F9E0; Make or Do?</h3>
+  <div class="rule"><strong>MAKE</strong> &mdash; Use when something is created, produced, or constructed. A result or output comes into existence.<br>
+  Key collocations: make a <em>decision</em> &bull; make a <em>mistake</em> &bull; make <em>progress</em> &bull; make a <em>profit</em> &bull; make an <em>announcement</em> &bull; make an <em>impression</em> &bull; make a <em>plan</em> &bull; make <em>money</em></div>
+  <div class="rule"><strong>DO</strong> &mdash; Use when referring to tasks, activities, work, or chores &mdash; things you perform or carry out.<br>
+  Key collocations: do <em>research</em> &bull; do your <em>best</em> &bull; do <em>overtime</em> &bull; do someone a <em>favour</em> &bull; do an <em>exercise</em> &bull; do <em>homework</em> &bull; do <em>damage</em></div>
+  <div class="exbox">
+    <div>&bull; She <strong>made</strong> an important decision under pressure. <span style="color:#b7e4c7">(produced a decision)</span></div>
+    <div>&bull; He <strong>does</strong> a lot of research in his own time. <span style="color:#b7e4c7">(carries out an activity)</span></div>
+    <div>&bull; They <strong>made</strong> significant progress last quarter. <span style="color:#b7e4c7">(produced a result)</span></div>
+    <div>&bull; Can you <strong>do</strong> me a favour and check this report? <span style="color:#b7e4c7">(perform a task for someone)</span></div>
+  </div>
+</div>
+
+<div class="g-item"><p><strong>1.</strong> We need to ______ a decision before the board meeting.</p>
+<select id="g1_1" class="gex" onchange="sv('g1_1')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_1">"Decision" is a result you produce &mdash; it collocates with <em>make</em>.</div></div>
+
+<div class="g-item"><p><strong>2.</strong> Could you ______ me a favour and check this document before I send it?</p>
+<select id="g1_2" class="gex" onchange="sv('g1_2')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_2">"A favour" is a task performed for someone &mdash; it collocates with <em>do</em>.</div></div>
+
+<div class="g-item"><p><strong>3.</strong> The company expects to ______ a profit by the end of Q3.</p>
+<select id="g1_3" class="gex" onchange="sv('g1_3')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_3">Money and financial results are generated &mdash; we <em>make</em> a profit, make money.</div></div>
+
+<div class="g-item"><p><strong>4.</strong> She always ______ her best when there is pressure on the team.</p>
+<select id="g1_4" class="gex" onchange="sv('g1_4')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_4">"Do your best" is a fixed expression &mdash; you apply effort, you don't create it.</div></div>
+
+<div class="g-item"><p><strong>5.</strong> The board will ______ an announcement at the end of the quarter.</p>
+<select id="g1_5" class="gex" onchange="sv('g1_5')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_5">An announcement is produced and delivered &mdash; "make an announcement" is the standard collocation.</div></div>
+
+<div class="g-item"><p><strong>6.</strong> He ______ a lot of overtime during the audit season.</p>
+<select id="g1_6" class="gex" onchange="sv('g1_6')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_6">Overtime is an activity you carry out &mdash; "do overtime" is the fixed expression.</div></div>
+
+<div class="g-item"><p><strong>7.</strong> It is important to ______ a good impression in the first client meeting.</p>
+<select id="g1_7" class="gex" onchange="sv('g1_7')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_7">An impression is something you create in someone else's mind &mdash; "make an impression."</div></div>
+
+<div class="g-item"><p><strong>8.</strong> Can you ______ the calculations again? I think there may be an error in the model.</p>
+<select id="g1_8" class="gex" onchange="sv('g1_8')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_8">Calculations are a task you perform &mdash; "do the calculations."</div></div>
+
+<div class="g-item"><p><strong>9.</strong> She ______ a mistake in the analysis but spotted it before submission.</p>
+<select id="g1_9" class="gex" onchange="sv('g1_9')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_9">"Make a mistake" is a fixed, very common expression &mdash; you produce an error, not perform one.</div></div>
+
+<div class="g-item"><p><strong>10.</strong> We ______ significant progress on the restructuring plan last month.</p>
+<select id="g1_10" class="gex" onchange="sv('g1_10')"><option value="">-- Make or Do? --</option><option value="make">make</option><option value="do">do</option></select>
+<div class="hint" id="gh1_10">"Make progress" = produce advancement. A fixed expression.</div></div>
+
+<div class="btn-row">
+  <button class="btn-dark" onclick="checkG1()">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('gkey1')">See Answers</button>
+</div>
+<div id="gkey1" class="g-key">
+<strong>Answer Key &mdash; Make or Do?</strong><br><br>
+1. <strong>make</strong> a decision &nbsp;&bull;&nbsp; 2. <strong>do</strong> a favour &nbsp;&bull;&nbsp; 3. <strong>make</strong> a profit &nbsp;&bull;&nbsp; 4. <strong>do</strong> her best &nbsp;&bull;&nbsp; 5. <strong>make</strong> an announcement<br>
+6. <strong>do</strong> overtime &nbsp;&bull;&nbsp; 7. <strong>make</strong> a good impression &nbsp;&bull;&nbsp; 8. <strong>do</strong> the calculations &nbsp;&bull;&nbsp; 9. <strong>make</strong> a mistake &nbsp;&bull;&nbsp; 10. <strong>make</strong> progress
+</div>
+</div><!-- /g1 -->
+
+<!-- ── G3: -ED PRONUNCIATION ── -->
+<div id="g3" class="g-panel">
+<div class="g-intro">
+  <h3>&#x1F50A; The -ed ending: three pronunciations</h3>
+  <p style="color:#c9b8a8;font-size:14px;margin:0 0 14px;">Regular past simple verbs end in -ed, but the pronunciation depends on the final sound of the base verb. Click the speaker buttons to hear examples.</p>
+  <div class="pron-grid">
+    <div class="pron-card tc">
+      <span class="pron-sym">/t/</span>
+      <div class="pron-txt">After <strong>voiceless</strong> consonants:<br>p, k, f, s, sh, ch, th</div>
+      <button class="spk" onclick="speak('walked',event)">&#x1F50A; walked</button>
+      <button class="spk" onclick="speak('missed',event)">&#x1F50A; missed</button>
+    </div>
+    <div class="pron-card dc">
+      <span class="pron-sym">/d/</span>
+      <div class="pron-txt">After <strong>voiced</strong> consonants and vowel sounds:<br>b, g, v, z, m, n, l, r + vowels</div>
+      <button class="spk" onclick="speak('called',event)">&#x1F50A; called</button>
+      <button class="spk" onclick="speak('played',event)">&#x1F50A; played</button>
+    </div>
+    <div class="pron-card ic">
+      <span class="pron-sym">/&#x026A;d/</span>
+      <div class="pron-txt">After base verbs ending in <strong>/t/ or /d/</strong></div>
+      <button class="spk" onclick="speak('wanted',event)">&#x1F50A; wanted</button>
+      <button class="spk" onclick="speak('needed',event)">&#x1F50A; needed</button>
+    </div>
+  </div>
+</div>
+
+<div class="r-btn-nav">
+  <button id="rbtn1" class="g-tab-btn active" onclick="showRound(1)">Round 1</button>
+  <button id="rbtn2" class="g-tab-btn" onclick="showRound(2)">Round 2</button>
+  <button id="rbtn3" class="g-tab-btn" onclick="showRound(3)">Round 3</button>
+</div>
+
+<div id="round1" class="r-panel active">
+<div class="r-hdr"><h3>Round 1 &mdash; 10 verbs</h3><button class="btn-reset" onclick="resetRound(1)">Reset</button></div>
+<div class="word-bank" id="bank1"></div>
+<div class="sort-cols">
+  <div class="scol tc" onclick="dropChip(event,'t',1)"><div class="col-lbl">/t/</div><div class="drop-zone" id="z1t"></div></div>
+  <div class="scol dc" onclick="dropChip(event,'d',1)"><div class="col-lbl">/d/</div><div class="drop-zone" id="z1d"></div></div>
+  <div class="scol ic" onclick="dropChip(event,'id',1)"><div class="col-lbl">/&#x026A;d/</div><div class="drop-zone" id="z1id"></div></div>
+</div>
+<div class="btn-row">
+  <button class="btn-dark" onclick="checkRound(1)">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('rkey1')">See Answers</button>
+</div>
+<div id="sfb1" class="sfb"></div>
+<div id="rkey1" class="g-key"><strong>Round 1:</strong><br>
+/t/ &rarr; walked (walk&rarr;/k/), missed (miss&rarr;/s/), helped (help&rarr;/p/)<br>
+/d/ &rarr; called (call&rarr;/l/), played (play&rarr;vowel), listened (listen&rarr;/n/), arrived (arrive&rarr;/v/)<br>
+/&#x026A;d/ &rarr; wanted (want&rarr;/t/), started (start&rarr;/t/), needed (need&rarr;/d/)</div>
+</div>
+
+<div id="round2" class="r-panel">
+<div class="r-hdr"><h3>Round 2 &mdash; 10 verbs</h3><button class="btn-reset" onclick="resetRound(2)">Reset</button></div>
+<div class="word-bank" id="bank2"></div>
+<div class="sort-cols">
+  <div class="scol tc" onclick="dropChip(event,'t',2)"><div class="col-lbl">/t/</div><div class="drop-zone" id="z2t"></div></div>
+  <div class="scol dc" onclick="dropChip(event,'d',2)"><div class="col-lbl">/d/</div><div class="drop-zone" id="z2d"></div></div>
+  <div class="scol ic" onclick="dropChip(event,'id',2)"><div class="col-lbl">/&#x026A;d/</div><div class="drop-zone" id="z2id"></div></div>
+</div>
+<div class="btn-row">
+  <button class="btn-dark" onclick="checkRound(2)">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('rkey2')">See Answers</button>
+</div>
+<div id="sfb2" class="sfb"></div>
+<div id="rkey2" class="g-key"><strong>Round 2:</strong><br>
+/t/ &rarr; worked (work&rarr;/k/), talked (talk&rarr;/k/), passed (pass&rarr;/s/), laughed (laugh&rarr;/f/)<br>
+/d/ &rarr; moved (move&rarr;/v/), planned (plan&rarr;/n/), used (use&rarr;/z/), followed (follow&rarr;vowel)<br>
+/&#x026A;d/ &rarr; decided (decide&rarr;/d/), waited (wait&rarr;/t/)</div>
+</div>
+
+<div id="round3" class="r-panel">
+<div class="r-hdr"><h3>Round 3 &mdash; 10 verbs</h3><button class="btn-reset" onclick="resetRound(3)">Reset</button></div>
+<div class="word-bank" id="bank3"></div>
+<div class="sort-cols">
+  <div class="scol tc" onclick="dropChip(event,'t',3)"><div class="col-lbl">/t/</div><div class="drop-zone" id="z3t"></div></div>
+  <div class="scol dc" onclick="dropChip(event,'d',3)"><div class="col-lbl">/d/</div><div class="drop-zone" id="z3d"></div></div>
+  <div class="scol ic" onclick="dropChip(event,'id',3)"><div class="col-lbl">/&#x026A;d/</div><div class="drop-zone" id="z3id"></div></div>
+</div>
+<div class="btn-row">
+  <button class="btn-dark" onclick="checkRound(3)">Check your answers</button>
+  <button class="btn-grey" onclick="toggleKey('rkey3')">See Answers</button>
+</div>
+<div id="sfb3" class="sfb"></div>
+<div id="rkey3" class="g-key"><strong>Round 3:</strong><br>
+/t/ &rarr; watched (watch&rarr;/t&#x283;/), rushed (rush&rarr;/&#x283;/), dropped (drop&rarr;/p/)<br>
+/d/ &rarr; managed (manage&rarr;/d&#x292;/), showed (show&rarr;vowel), realised (realise&rarr;/z/), served (serve&rarr;/v/)<br>
+/&#x026A;d/ &rarr; ended (end&rarr;/d/), invited (invite&rarr;/t/), recommended (recommend&rarr;/d/)</div>
+</div>
+
+</div><!-- /g3 -->
+</div><!-- /grave -->
+</div>
+<script>
+// ── TAB SWITCHING ──────────────────────────────────────────
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function showGTab(id,btn){
+  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.g-tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── STORAGE ────────────────────────────────────────────────
+function sv(id){try{localStorage.setItem(id,document.getElementById(id).value);}catch(e){}}
+function saveA1(q,v){try{localStorage.setItem('a1_'+q,v);}catch(e){}}
+
+// ── ACTIVITY 2 ─────────────────────────────────────────────
+function checkA2(){
+  let ok=0,tot=0;
+  for(let i=1;i<=32;i++){
+    const s=document.getElementById('c'+i);
+    if(!s)continue;tot++;
+    if(s.value==='ok'){s.style.background='#d4edda';s.style.borderColor='#6b8f71';ok++;}
+    else if(s.value===''){s.style.background='';s.style.borderColor='';}
+    else{s.style.background='#fde8e8';s.style.borderColor='#c0392b';}
+  }
+  alert('Activity 2: '+ok+' / '+tot+' correct.');
+}
+
+// ── ACTIVITY 3 ─────────────────────────────────────────────
+const a3k={a3_1:'a',a3_2:'a',a3_3:'a',a3_4:'a',a3_5:'a'};
+function checkA3(){
+  let ok=0;
+  for(let i=1;i<=5;i++){
+    const id='a3_'+i;
+    const s=document.getElementById(id);
+    const h=document.getElementById('h3_'+i);
+    if(s.value===a3k[id]){s.style.background='#d4edda';s.style.borderColor='#6b8f71';if(h)h.style.display='none';ok++;}
+    else if(s.value===''){s.style.background='';s.style.borderColor='';}
+    else{s.style.background='#fde8e8';s.style.borderColor='#c0392b';if(h)h.style.display='block';}
+  }
+  alert('Activity 3: '+ok+' / 5 correct.');
+}
+
+// ── TOGGLE ANSWER KEY ──────────────────────────────────────
+function toggleKey(id){const b=document.getElementById(id);b.style.display=b.style.display==='block'?'none':'block';}
+
+// ── GRAVEYARD 1 ────────────────────────────────────────────
+const g1k={g1_1:'make',g1_2:'do',g1_3:'make',g1_4:'do',g1_5:'make',g1_6:'do',g1_7:'make',g1_8:'do',g1_9:'make',g1_10:'make'};
+function checkG1(){
+  let ok=0;
+  for(let i=1;i<=10;i++){
+    const id='g1_'+i,s=document.getElementById(id),h=document.getElementById('gh1_'+i);
+    if(s.value===g1k[id]){s.style.background='#d4edda';s.style.borderColor='#6b8f71';if(h)h.style.display='none';ok++;}
+    else if(s.value===''){s.style.background='';s.style.borderColor='';}
+    else{s.style.background='#fde8e8';s.style.borderColor='#c0392b';if(h)h.style.display='block';}
+  }
+  alert('Make or Do: '+ok+' / 10 correct.');
+}
+
+// ── WEB SPEECH API ─────────────────────────────────────────
+function speak(text,event){
+  if(event)event.stopPropagation();
+  if(window.speechSynthesis.speaking)window.speechSynthesis.cancel();
+  setTimeout(()=>{
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB';u.rate=0.78;u.pitch=1;
+  window.speechSynthesis.speak(u);
+  },350);
+}
+
+// ── PRONUNCIATION SORT DATA ────────────────────────────────
+const RD={
+  1:[{w:'walked',a:'t'},{w:'missed',a:'t'},{w:'helped',a:'t'},
+     {w:'called',a:'d'},{w:'played',a:'d'},{w:'listened',a:'d'},{w:'arrived',a:'d'},
+     {w:'wanted',a:'id'},{w:'started',a:'id'},{w:'needed',a:'id'}],
+  2:[{w:'worked',a:'t'},{w:'talked',a:'t'},{w:'passed',a:'t'},{w:'laughed',a:'t'},
+     {w:'moved',a:'d'},{w:'planned',a:'d'},{w:'used',a:'d'},{w:'followed',a:'d'},
+     {w:'decided',a:'id'},{w:'waited',a:'id'}],
+  3:[{w:'watched',a:'t'},{w:'rushed',a:'t'},{w:'dropped',a:'t'},
+     {w:'managed',a:'d'},{w:'showed',a:'d'},{w:'realised',a:'d'},{w:'served',a:'d'},
+     {w:'ended',a:'id'},{w:'invited',a:'id'},{w:'recommended',a:'id'}]
+};
+
+let selChip=null,selRound=null;
+
+function buildBanks(){
+  [1,2,3].forEach(r=>{
+    const bank=document.getElementById('bank'+r);
+    bank.innerHTML='';
+    // shuffle
+    const items=[...RD[r]].sort(()=>Math.random()-0.5);
+    items.forEach(item=>{
+      const wrap=document.createElement('div');
+      wrap.className='chip-wrap';
+      const chip=document.createElement('span');
+      chip.className='chip';
+      chip.textContent=item.w;
+      chip.dataset.word=item.w;
+      chip.dataset.ans=item.a;
+      chip.dataset.round=r;
+      chip.onclick=()=>selectChip(chip,r);
+      const spkBtn=document.createElement('button');
+      spkBtn.className='spk';
+      spkBtn.innerHTML='&#x1F50A;';
+      spkBtn.title='Hear: '+item.w;
+      spkBtn.onclick=(e)=>{e.stopPropagation();speak(item.w,e);};
+      wrap.appendChild(chip);
+      wrap.appendChild(spkBtn);
+      bank.appendChild(wrap);
+    });
+  });
+}
+
+function selectChip(chip,r){
+  if(chip.classList.contains('placed'))return;
+  if(selChip&&selChip!==chip){selChip.classList.remove('sel');}
+  if(selChip===chip){selChip.classList.remove('sel');selChip=null;selRound=null;return;}
+  selChip=chip;selRound=r;
+  chip.classList.add('sel');
+}
+
+function dropChip(event,zone,r){
+  event.stopPropagation();
+  if(!selChip||selRound!==r)return;
+  const zoneEl=document.getElementById('z'+r+zone);
+  const dropped=document.createElement('div');
+  dropped.className='dchip';
+  dropped.dataset.word=selChip.dataset.word;
+  dropped.dataset.ans=selChip.dataset.ans;
+  dropped.dataset.zone=zone;
+  dropped.dataset.round=r;
+  dropped.innerHTML=selChip.dataset.word+' <button class="spk" style="font-size:13px;padding:2px 5px;" onclick="speak(\'' +selChip.dataset.word+'\',event)">&#x1F50A;</button>';
+  dropped.onclick=function(e){if(e.target.tagName!=='BUTTON')returnDChip(this);};
+  zoneEl.appendChild(dropped);
+  selChip.classList.add('placed');
+  selChip.classList.remove('sel');
+  selChip=null;selRound=null;
+  document.getElementById('sfb'+r).style.display='none';
+}
+
+function returnDChip(dchip){
+  const word=dchip.dataset.word;
+  const r=dchip.dataset.round;
+  dchip.remove();
+  const orig=document.querySelector('.chip[data-word="'+word+'"][data-round="'+r+'"]');
+  if(orig){orig.classList.remove('placed','sel');}
+}
+
+function checkRound(r){
+  const zones=['t','d','id'];
+  let ok=0,tot=0,wrong=[];
+  zones.forEach(z=>{
+    document.querySelectorAll('#z'+r+z+' .dchip').forEach(d=>{
+      tot++;
+      if(d.dataset.ans===z){d.style.background='#d4edda';d.style.borderColor='#6b8f71';ok++;}
+      else{d.style.background='#fde8e8';d.style.borderColor='#c0392b';wrong.push(d.dataset.word);}
+    });
+  });
+  const fb=document.getElementById('sfb'+r);
+  fb.style.display='block';
+  if(tot===0){fb.className='sfb part';fb.textContent='Place some verbs first!';return;}
+  if(ok===10&&tot===10){fb.className='sfb ok';fb.textContent='Perfect! All 10 verbs correctly sorted.';}
+  else{fb.className='sfb part';fb.textContent=ok+'/'+tot+' placed correctly. Review: '+wrong.join(', ')+'.';}
+}
+
+function resetRound(r){
+  ['t','d','id'].forEach(z=>{document.getElementById('z'+r+z).innerHTML='';});
+  document.querySelectorAll('.chip[data-round="'+r+'"]').forEach(c=>{c.classList.remove('placed','sel');c.style.outline='';});
+  selChip=null;selRound=null;
+  const fb=document.getElementById('sfb'+r);
+  if(fb)fb.style.display='none';
+}
+
+function showRound(r){
+  [1,2,3].forEach(n=>{
+    document.getElementById('round'+n).classList.remove('active');
+    document.getElementById('rbtn'+n).classList.remove('active');
+  });
+  document.getElementById('round'+r).classList.add('active');
+  document.getElementById('rbtn'+r).classList.add('active');
+}
+
+// ── RESTORE ON LOAD ────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  buildBanks();
+  try{
+    for(let i=1;i<=32;i++){const s=document.getElementById('c'+i);const v=localStorage.getItem('c'+i);if(s&&v)s.value=v;}
+    ['a3_1','a3_2','a3_3','a3_4','a3_5'].forEach(id=>{const s=document.getElementById(id);const v=localStorage.getItem(id);if(s&&v)s.value=v;});
+    for(let i=1;i<=10;i++){const id='g1_'+i;const s=document.getElementById(id);const v=localStorage.getItem(id);if(s&&v)s.value=v;}
+      }catch(e){}
+});
+</script>
+</body>
+</html>
