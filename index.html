@@ -6,96 +6,363 @@
     <title>MIKEL - ENGLISH 2.0</title>
     <style>
         :root {
-            --green: #6b8f71; --green-dk: #4a634e; --grass: #f4f7f5;
-            --ink: #334155; --muted: #64748b; --line: #cbd5e1;
-            --bg: #f9fbf9; --card: #ffffff;
+            --pastel-green-dark: #6b8f71;
+            --pastel-green-light: #f4f7f5;
+            --pastel-blue-dark: #5c7f91;
+            --pastel-blue-light: #f0f4f8;
+            --pastel-orange-light: #fdf5e6;
+            --pastel-orange-dark: #c68a4c;
+            --pastel-bg: #f9fbf9;
+            --text-main: #334155;
+            --border-color: #cbd5e1;
         }
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 20px; background: var(--bg); color: var(--ink); 
-               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-               line-height: 1.6; font-style: normal !important; }
-        .container { max-width: 900px; margin: 0 auto; }
-        header { text-align: center; margin-bottom: 30px; }
-        .tabs { display: flex; gap: 8px; margin-bottom: 20px; background: var(--card); 
-                padding: 8px; border-radius: 12px; border: 1px solid var(--line); }
-        .tab { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; 
-               font-weight: 600; color: var(--muted); background: transparent; }
-        .tab.active { background: var(--green); color: white; }
-        .panel { display: none; }
-        .panel.active { display: block; }
-        .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; 
-                padding: 22px; margin-bottom: 14px; }
-        .btn-audio { background: transparent; border: 1px solid var(--green); color: var(--green); 
-                     cursor: pointer; border-radius: 6px; padding: 4px 8px; font-size: 13px; 
-                     margin-left: 8px; vertical-align: middle; }
-        .btn-audio:hover { background: var(--grass); }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: var(--pastel-bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { max-width: 950px; margin: 0 auto; }
+        header { 
+            background: linear-gradient(135deg, #b7e4c7, #94d2bd); 
+            color: #1b4332; 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+        }
+        .header-date {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d6a4f;
+            margin-top: 5px;
+        }
+        .section-title {
+            color: #2d6a4f;
+            border-bottom: 2px solid #b7e4c7;
+            padding-bottom: 8px;
+            margin-top: 35px;
+        }
+        .scenario-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .scenario-title-text {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1b4332;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .scenario-body {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #475569;
+            background: var(--pastel-green-light);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .response-box {
+            background: #ffffff;
+            border: 1px dashed var(--pastel-blue-dark);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .response-option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .response-option input {
+            margin-top: 3px;
+        }
+        .pv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .pv-table th, .pv-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        .pv-table th { background-color: var(--pastel-blue-light); color: var(--pastel-blue-dark); }
+        .exercise-select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-top: 4px;
+            width: 100%;
+            background-color: white;
+            font-size: 14px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .inline-select {
+            width: auto;
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 0 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .button-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-validate {
+            background-color: var(--pastel-green-dark);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-answers {
+            background-color: #64748b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-validate:hover, .btn-answers:hover { opacity: 0.9; }
+        .answer-key-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--pastel-orange-light);
+            border-left: 5px solid var(--pastel-orange-dark);
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header><h1>MIKEL - ENGLISH 2.0</h1></header>
+    <header>
+        <h1>MIKEL - ENGLISH 2.0</h1>
+        <div class="header-date">June 4, 2026</div>
+    </header>
 
-    <div class="tabs" id="tabs">
-        <button class="tab active" data-tab="p1">1. Modules</button>
-        <button class="tab" data-tab="p2">2. The Graveyard</button>
-    </div>
+    <h2 class="section-title">Activity 1</h2>
+    <p style="font-style: italic; color: #64748b;">Read each scenario and choose your response. Your choices are automatically saved.</p>
 
-    <!-- MAIN MODULES -->
-    <div class="panel active" id="p1">
-        <div class="card">
-            <h2>Professional Scenarios</h2>
-            <div id="p1-content"></div>
+    <div id="scenarios-container">
+        <div class="scenario-card">
+            <span class="scenario-title-text">1. The polished chapter</span>
+            <div class="scenario-body">A doctoral student you have supervised for three years submits a chapter of disquieting accomplishment. A close reading leads you to a near-certain conclusion: she has <strong>passed off</strong> substantial passages from an obscure monograph as her own thinking, confident no detection algorithm will <strong>flag up</strong> a source it has never encountered. The plagiarism is systematic enough to rule out negligence, yet not demonstrable enough to <strong>hold up</strong> before a tribunal lacking your specialist knowledge. Exposing her ends her career. Saying nothing makes you party to a deception that could <strong>unravel</strong> at any point over the next thirty years.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_1" value="0" onchange="saveActivity1(1, 0)"> Pass the issue straight to the academic integrity committee and let the official machinery take its course, even if it ends her career.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_1" value="1" onchange="saveActivity1(1, 1)"> Order a double espresso and look out the window. If the administrative machine can't catch it, maybe thirty years of dynamic career anxiety is just a built-in feature of modern supervision.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_1" value="2" onchange="saveActivity1(1, 2)"> Call her in for a private, direct chat and offer a clean slate to completely rewrite the chapter under your strict watch without involving the committee.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">2. The dominant seminar voice</span>
+            <div class="scenario-body">A student of exceptional ability has <strong>crowded out</strong> the rest of the seminar — not through aggression, but through a gravitational confidence quieter students cannot match in real time. Participation has <strong>levelled off</strong> at three or four voices. A pattern is <strong>playing out</strong> that you recognise from faculty committees: the silent majority's written work is beginning to suffer. The dynamic <strong>cuts across</strong> the whole cohort. Intervening risks pathologising what makes him exceptional; not intervening normalises a conversational structure some students will <strong>carry over</strong> into their own careers.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_2" value="0" onchange="saveActivity1(2, 0)"> Let him run the entire hour. If the rest of the cohort settles into total silence, I can use the extra mental bandwidth to finish editing my department budget before noon.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_2" value="1" onchange="saveActivity1(2, 1)"> Change the setup and use strictly timed breakout groups to physically stop one person from taking over the whole session.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_2" value="2" onchange="saveActivity1(2, 2)"> Talk to him in private, tell him he's brilliant, but explicitly ask him to hold back so the quieter students have room to breathe.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">3. The grade appeal</span>
+            <div class="scenario-body">A student lodges a formal appeal you initially dismissed as tactical. Re-reading without marking fatigue, you <strong>tease out</strong> a counter-argument that is genuinely more sophisticated than you credited. Revising upward is honest — but it <strong>throws up</strong> a structural problem: four other students received identical marks for comparable work. Whether your original assessment would <strong>hold up</strong> under external moderation is uncomfortable to consider. Revising opens a cascade; not revising requires you to <strong>stand by</strong> a judgement you can no longer <strong>stand by</strong>.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_3" value="0" onchange="saveActivity1(3, 0)"> Be upfront about it — fix the student's grade and quietly get the other four similar submissions looked at again without anyone knowing whose work is whose.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_3" value="1" onchange="saveActivity1(3, 1)"> Close the laptop, step away from the desk, and stand by the coffee maker. I am officially too tired to discover hidden structural genius in messy late-night essays.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_3" value="2" onchange="saveActivity1(3, 2)"> Turn down the appeal on fairness grounds, but sit down with the student and give them real, useful guidance for what's coming up next.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">4. The fabricated data</span>
+            <div class="scenario-body">Reviewing a pre-print by the colleague who secured your tenure, you notice a statistical anomaly that is almost certainly deliberate. The research underpins two ongoing clinical trials. <strong>Flagging up</strong> your concerns means bringing down not only a career but an entire line of inquiry — and triggering a departmental audit from which no one emerges intact. Staying silent is collusion you could not <strong>ride out</strong> if the fabrication surfaces independently, as it almost certainly will.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_4" value="0" onchange="saveActivity1(4, 0)"> Clear the browser history, close the document, and convince myself that 'statistical fabrication' is just an incredibly bold, artistic interpretation of empirical data.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_4" value="1" onchange="saveActivity1(4, 1)"> Confront them behind closed doors and give them a short deadline to withdraw the paper or report the anomaly before you do it for them.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_4" value="2" onchange="saveActivity1(4, 2)"> Drop an anonymous, highly detailed technical breakdown directly on the research integrity director's desk and walk away completely.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">5. The viral clip</span>
+            <div class="scenario-body">A deliberately provocative remark — understood as irony by everyone present — has been stripped of context and posted online, where it is playing out as a straightforward expression of the view you were interrogating. The communications office urges you to put out a statement. Any public response risks amplifying the story; a clumsy apology may be read as an admission. The alternative is to <strong>sit it out</strong>. What you cannot <strong>factor in</strong> is whether silence will be construed as confirmation.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_5" value="0" onchange="saveActivity1(5, 0)"> Post a short, factual statement explaining the actual academic context of the seminar without sounding defensive or apologetic.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_5" value="1" onchange="saveActivity1(5, 1)"> Do exactly what the PR team says: lay low, keep completely quiet, and wait for the internet mob to find something else to look at.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_5" value="2" onchange="saveActivity1(5, 2)"> Turn off the phone, put it in a drawer, and leave the country. If the internet believes I'm a monster, I might as well enjoy a quiet weekend away from the grid.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">6. The mature student</span>
+            <div class="scenario-body">A student who spent twenty years in senior risk management cannot convert experiential intelligence into academic currency. He resists every overture of support, reading the offer of guidance as an implicit verdict on his performance. You could <strong>map out</strong> a tailored remediation path — but without his consent, doing so risks compounding the very humiliation that is holding him back. Leaving him to his own devices — <strong>writing him off</strong>, in effect — wastes someone who could produce original work by <strong>drawing on</strong> a practitioner's perspective none of his peers can replicate.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_6" value="0" onchange="saveActivity1(6, 0)"> Change how you offer help: ask him to lead a seminar session on real-world risk, and use that as a back door to teach him the academic theory.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_6" value="1" onchange="saveActivity1(6, 1)"> Give up on the customized strategic roadmap. If someone with two decades of corporate leadership experience wants to fail out of pride, I'm not going to force an intervention.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_6" value="2" onchange="saveActivity1(6, 2)"> Make the extra guidance steps a mandatory requirement for the entire group so he doesn't feel singled out or defensive.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">7. The research grant</span>
+            <div class="scenario-body">A leading asset management firm offers to fund a five-year research programme into the long-run performance of actively managed equity funds — precisely the question your department has spent a decade building the data infrastructure to answer. One clause grants the sponsor the right to <strong>sit on</strong> any findings it deems commercially sensitive for an indefinite period. You have <strong>weighed up</strong> the alternatives. Accepting means producing work that may never reach publication, or reach it only dressed up to vindicate a fund range the data does not support. Declining means <strong>winding up</strong> the most significant empirical project of your career. The arrangement is being <strong>glossed over</strong> in departmental communications as a standard data-access partnership. It is not.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_7" value="0" onchange="saveActivity1(7, 0)"> Take the massive endowment, approve the restrictive clause, and order premium office chairs. If the company wants to hide reality from the public forever, we can build a very comfortable private silo.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_7" value="1" onchange="saveActivity1(7, 1)"> Say no to the money immediately to protect your academic freedom, even if it means putting the brakes on your biggest data project.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_7" value="2" onchange="saveActivity1(7, 2)"> Try to compromise: push back on the clause and insist on a strict 12-month maximum delay rule instead of an open-ended restriction.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">8. The undocumented extension</span>
+            <div class="scenario-body">A student requests a compassionate extension she finds credible but will not document through the welfare process, claiming it would compound her distress. The institutional requirement exists partly to prevent the system being played. Granting an undocumented exception sets a precedent you cannot <strong>walk back</strong> — word spreads, and you will soon adjudicate claims you cannot verify. Refusing requires you to <strong>see through</strong> a decision whose practical effects you consider disproportionate, on procedural grounds you privately doubt.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_8" value="0" onchange="saveActivity1(8, 0)"> Give her a few extra days off the record, but handle the paperwork directly with the welfare team behind the scenes so she doesn't have to stress.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_8" value="1" onchange="saveActivity1(8, 1)"> Stick strictly to the rulebook, deny the extension until she uploads the official forms, and keep the playing field level for everyone.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_8" value="2" onchange="saveActivity1(8, 2)"> Grant the exception immediately to avoid the cold bureaucratic conflict, then brace myself for the inescapable flood of identical undocumented requests next Friday.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">9. The walkout</span>
+            <div class="scenario-body">A third of your students have walked out in protest against a university policy you privately consider indefensible. Those who remained are visibly uncomfortable. The departmental line treats this as a disciplinary matter. You are unwilling to <strong>go along with</strong> that framing, which would require you to <strong>call out</strong> behaviour you consider justified. <strong>Papering over</strong> the genuine grievance through neutral language feels dishonest; staying silent <strong>plays into</strong> the hands of those claiming the walkout was tacitly approved.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_9" value="0" onchange="saveActivity1(9, 0)"> Turn the policy issue into an immediate open debate at the start of class, validating their frustration without breaking official staff rules.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_9" value="1" onchange="saveActivity1(9, 1)"> Pack up my notes, walk straight out the back door behind the protesters, and let the administration figure out who is actually managing the room dynamic.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_9" value="2" onchange="saveActivity1(9, 2)"> Keep your head down, ignore the empty chairs, and go straight into the planned lecture slides to protect the time of those who stayed.</label></div>
+            </div>
+        </div>
+        <div class="scenario-card">
+            <span class="scenario-title-text">10. The deteriorating candidate</span>
+            <div class="scenario-body">Your most promising doctoral candidate, months from submission, is showing signs you can no longer <strong>gloss over</strong>: unworkable timelines, erratic communication, analytical capacity <strong>breaking down</strong> under pressure she refuses to name. Every attempt to open a conversation is <strong>brushed off</strong>. You suspect she is terrified that acknowledging difficulty will mark her out as unsuitable for the academic career she has planned. Your instinct is to <strong>step in</strong>. The institution has failed to <strong>flesh out</strong> its guidance on what that would mean legally or ethically, leaving you to act in a grey area and own the consequences.</div>
+            <div class="response-box">
+                <div class="response-option"><label><input type="radio" name="resp_10" value="0" onchange="saveActivity1(10, 0)"> Step in completely unprompted, rewrite her flawed data analysis metrics myself over the weekend, and agree to never mention the structural intervention again.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_10" value="1" onchange="saveActivity1(10, 1)"> Call an official meeting focused entirely on scheduling and structural milestones, giving her a safe professional angle to adjust without forcing a personal confession.</label></div>
+                <div class="response-option"><label><input type="radio" name="resp_10" value="2" onchange="saveActivity1(10, 2)"> Officially flag the situation to the university student support office to make sure professional therapists step in and clear you of legal liability.</label></div>
+            </div>
         </div>
     </div>
-
-    <!-- THE GRAVEYARD -->
-    <div class="panel" id="p2">
-        <div class="card">
-            <h2>The Graveyard</h2>
-            <p>Retired modules.</p>
-        </div>
+    
+    <div class="button-group">
+        <button class="btn-validate" onclick="saveActivity1Summary()">Save Answers</button>
     </div>
-</div>
 
-<script>
-    /* 1. DATA */
-    const modules = [
-        { id: 1, text: "Handling a plagiarism case" },
-        { id: 2, text: "Assessing a student's progress" },
-        { id: 3, text: "Organizing the syllabus" }
-    ];
 
-    /* 2. AUDIO ENGINE */
-    function speakText(text) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-GB';
-            utterance.rate = 0.85;
-            window.speechSynthesis.speak(utterance);
-        }
-    }
+    <h2 class="section-title">Activity 2</h2>
+    <p style="font-style: italic; color: #64748b;">Match the phrasal verbs to their precise definitions.</p>
+    
+    <table class="pv-table">
+        <thead>
+            <tr>
+                <th>Phrasal Verb</th>
+                <th>Definition Selection Challenge</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>pass off (as)</strong></td><td><select id="challenge_1" class="exercise-select" onchange="saveSelection('challenge_1')"><option value="">-- Choose definition --</option><option value="correct">Present something false as genuine</option><option value="w1">To hand over control or ownership without signature</option><option value="w2">To systematically ignore an official report</option></select></td></tr>
+            <tr><td><strong>flag up</strong></td><td><select id="challenge_2" class="exercise-select" onchange="saveSelection('challenge_2')"><option value="">-- Choose definition --</option><option value="correct">Draw urgent attention to a risk or problem</option><option value="w1">To celebrate a major organizational achievement</option><option value="w2">To mark the boundary of an asset zone</option></select></td></tr>
+            <tr><td><strong>hold up</strong></td><td><select id="challenge_3" class="exercise-select" onchange="saveSelection('challenge_3')"><option value="">-- Choose definition --</option><option value="correct">Remain valid when examined closely</option><option value="w1">To delay a corporate process intentionally</option><option value="w2">To structure a dynamic defense argument</option></select></td></tr>
+            <tr><td><strong>unravel</strong></td><td><select id="challenge_4" class="exercise-select" onchange="saveSelection('challenge_4')"><option value="">-- Choose definition --</option><option value="correct">Come apart gradually, exposing underlying flaws</option><option value="w1">To make a direct final decision</option><option value="w2">To obscure a fact using highly complex wording</option></select></td></tr>
+            <tr><td><strong>crowd out</strong></td><td><select id="challenge_5" class="exercise-select" onchange="saveSelection('challenge_5')"><option value="">-- Choose definition --</option><option value="correct">Displace by occupying all available space/attention</option><option value="w1">To join a larger social gathering</option><option value="w2">To physically move out of a restricted area</option></select></td></tr>
+            <tr><td><strong>level off</strong></td><td><select id="challenge_6" class="exercise-select" onchange="saveSelection('challenge_6')"><option value="">-- Choose definition --</option><option value="correct">Stabilise after a period of change</option><option value="w1">To balance out opposing financial ledgers</option><option value="w2">To diminish or lose value completely</option></select></td></tr>
+            <tr><td><strong>play out</strong></td><td><select id="challenge_7" class="exercise-select" onchange="saveSelection('challenge_7')"><option value="">-- Choose definition --</option><option value="correct">Develop or unfold in a particular way</option><option value="w1">To perform a rehearsed simulation</option><option value="w2">To become obsolete or exhausted</option></select></td></tr>
+            <tr><td><strong>cut across</strong></td><td><select id="challenge_8" class="exercise-select" onchange="saveSelection('challenge_8')"><option value="">-- Choose definition --</option><option value="correct">Apply to or affect multiple distinct groups</option><option value="w1">To interrupt a speaker aggressively</option><option value="w2">To reduce expenditures across the board</option></select></td></tr>
+            <tr><td><strong>carry over</strong></td><td><select id="challenge_9" class="exercise-select" onchange="saveSelection('challenge_9')"><option value="">-- Choose definition --</option><option value="correct">Transfer a pattern or behaviour into a new context</option><option value="w1">To win an argument after extended debate</option><option value="w2">To store surplus materials for future options</option></select></td></tr>
+            <tr><td><strong>tease out</strong></td><td><select id="challenge_10" class="exercise-select" onchange="saveSelection('challenge_10')"><option value="">-- Choose definition --</option><option value="correct">Identify something subtle through careful analysis</option><option value="w1">To mock an unverified thesis statement</option><option value="w2">To remove errors from a raw dataset</option></select></td></tr>
+            <tr><td><strong>throw up</strong></td><td><select id="challenge_11" class="exercise-select" onchange="saveSelection('challenge_11')"><option value="">-- Choose definition --</option><option value="correct">Generate or produce (problems, questions)</option><option value="w1">To discard outdated operational standards</option><option value="w2">To elevate an individual's title quickly</option></select></td></tr>
+            <tr><td><strong>stand by</strong></td><td><select id="challenge_12" class="exercise-select" onchange="saveSelection('challenge_12')"><option value="">-- Choose definition --</option><option value="correct">Continue to uphold a position or decision</option><option value="w1">To watch passively without offering help</option><option value="w2">To prepare resources for an imminent deployment</option></select></td></tr>
+            <tr><td><strong>ride out</strong></td><td><select id="challenge_13" class="exercise-select" onchange="saveSelection('challenge_13')"><option value="">-- Choose definition --</option><option value="correct">Endure a difficult period until it passes</option><option value="w1">To travel away from a central conflict zone</option><option value="w2">To minimize risks using complex insurance structures</option></select></td></tr>
+            <tr><td><strong>sit out</strong></td><td><select id="challenge_14" class="exercise-select" onchange="saveSelection('challenge_14')"><option value="">-- Choose definition --</option><option value="correct">Wait passively without acting until something is over</option><option value="w1">To resign formally from an advisory committee</option><option value="w2">To protest a rule by staying outside the room</option></select></td></tr>
+            <tr><td><strong>factor in</strong></td><td><select id="challenge_15" class="exercise-select" onchange="saveSelection('challenge_15')"><option value="">-- Choose definition --</option><option value="correct">Include something in reasoning or calculation</option><option value="w1">To break down a sum into modular parts</option><option value="w2">To delegate structural tasks to a provider</option></select></td></tr>
+            <tr><td><strong>map out</strong></td><td><select id="challenge_16" class="exercise-select" onchange="saveSelection('challenge_16')"><option value="">-- Choose definition --</option><option value="correct">Plan or describe in systematic, deliberate detail</option><option value="w1">To chart geographical asset distributions</option><option value="w2">To locate the root source of an operation</option></select></td></tr>
+            <tr><td><strong>write off</strong></td><td><select id="challenge_17" class="exercise-select" onchange="saveSelection('challenge_17')"><option value="">-- Choose definition --</option><option value="correct">Dismiss as beyond recovery; record a loss</option><option value="w1">To document an official complaint text</option><option value="w2">To sign off on a finalized corporate budget</option></select></td></tr>
+            <tr><td><strong>draw on</strong></td><td><select id="challenge_18" class="exercise-select" onchange="saveSelection('challenge_18')"><option value="">-- Choose definition --</option><option value="correct">Use a resource, experience, or skill actively</option><option value="w1">To extend an argument past its objective limit</option><option value="w2">To frame a visual timeline for reference</option></select></td></tr>
+            <tr><td><strong>sit on</strong></td><td><select id="challenge_19" class="exercise-select" onchange="saveSelection('challenge_19')"><option value="">-- Choose definition --</option><option value="correct">Deliberately delay or suppress information</option><option value="w1">To supervise a specialized workspace actively</option><option value="w2">To occupy a position of seniority within a firm</option></select></td></tr>
+            <tr><td><strong>weigh up</strong></td><td><select id="challenge_20" class="exercise-select" onchange="saveSelection('challenge_20')"><option value="">-- Choose definition --</option><option value="correct">Carefully consider competing factors</option><option value="w1">To calculate physical shipping units</option><option value="w2">To escalate an issue past standard review</option></select></td></tr>
+            <tr><td><strong>wind up</strong></td><td><select id="challenge_21" class="exercise-select" onchange="saveSelection('challenge_21')"><option value="">-- Choose definition --</option><option value="correct">Bring to a close; terminate</option><option value="w1">To initiate a high-level research project</option><option value="w2">To complicate a simple procedural matter</option></select></td></tr>
+            <tr><td><strong>gloss over</strong></td><td><select id="challenge_22" class="exercise-select" onchange="saveSelection('challenge_22')"><option value="">-- Choose definition --</option><option value="correct">Pass over quickly to avoid scrutiny</option><option value="w1">To provide a shiny surface polish or finish</option><option value="w2">To elaborate in deep technical language</option></select></td></tr>
+            <tr><td><strong>walk back</strong></td><td><select id="challenge_23" class="exercise-select" onchange="saveSelection('challenge_23')"><option value="">-- Choose definition --</option><option value="correct">Retract or soften a previous position</option><option value="w1">To trace an analytical path to its origin</option><option value="w2">To exit an ongoing negotiation quietly</option></select></td></tr>
+            <tr><td><strong>see through</strong></td><td><select id="challenge_24" class="exercise-select" onchange="saveSelection('challenge_24')"><option value="">-- Choose definition --</option><option value="correct">Complete despite difficulty; or: not be deceived by</option><option value="w1">To examine transparent physical components</option><option value="w2">To monitor a transaction profile carefully</option></select></td></tr>
+            <tr><td><strong>go along with</strong></td><td><select id="challenge_25" class="exercise-select" onchange="saveSelection('challenge_25')"><option value="">-- Choose definition --</option><option value="correct">Accept or agree without strong conviction</option><option value="w1">To accompany a colleague during a trip</option><option value="w2">To match the performance profile of peers</option></select></td></tr>
+            <tr><td><strong>call out</strong></td><td><select id="challenge_26" class="exercise-select" onchange="saveSelection('challenge_26')"><option value="">-- Choose definition --</option><option value="correct">Publicly identify and challenge problematic behaviour</option><option value="w1">To summon an external service team</option><option value="w2">To state a legal name during a roll call</option></select></td></tr>
+            <tr><td><strong>paper over</strong></td><td><select id="challenge_27" class="exercise-select" onchange="saveSelection('challenge_27')"><option value="">-- Choose definition --</option><option value="correct">Conceal a problem while creating appearance of resolution</option><option value="w1">To execute a massive printing task</option><option value="w2">To switch from digital storage to physical documents</option></select></td></tr>
+            <tr><td><strong>play into</strong></td><td><select id="challenge_28" class="exercise-select" onchange="saveSelection('challenge_28')"><option value="">-- Choose definition --</option><option value="correct">Inadvertently serve someone else's interests or narrative</option><option value="w1">To engage actively in a professional dynamic</option><option value="w2">To join a ongoing debate without preparation</option></select></td></tr>
+            <tr><td><strong>break down</strong></td><td><select id="challenge_29" class="exercise-select" onchange="saveSelection('challenge_29')"><option value="">-- Choose definition --</option><option value="correct">Cease to function; or: become emotionally overwhelmed</option><option value="w1">To partition an allocation into separate funds</option><option value="w2">To reduce a compound to its base molecules</option></select></td></tr>
+            <tr><td><strong>brush off</strong></td><td><select id="challenge_30" class="exercise-select" onchange="saveSelection('challenge_30')"><option value="">-- Choose definition --</option><option value="correct">Dismiss without proper engagement</option><option value="w1">To clean up an engineering workstation</option><option value="w2">To update an obsolete theoretical design</option></select></td></tr>
+            <tr><td><strong>flesh out</strong></td><td><select id="challenge_31" class="exercise-select" onchange="saveSelection('challenge_31')"><option value="">-- Choose definition --</option><option value="correct">Add substance and detail to something incomplete</option><option value="w1">To extract data elements from a file</option><option value="w2">To resolve a physical compliance friction</option></select></td></tr>
+            <tr><td><strong>step in</strong></td><td><select id="challenge_32" class="exercise-select" onchange="saveSelection('challenge_32')"><option value="">-- Choose definition --</option><option value="correct">Intervene where another has failed or is unable to act</option><option value="w1">To enter a restricted structural zone</option><option value="w2">To tender a resignation from a position</option></select></td></tr>
+        </tbody>
+    </table>
+    <div class="button-group">
+        <button class="btn-validate" onclick="validateActivity2()">Validate Activity 2</button>
+        <button class="btn-answers" onclick="toggleAnswers2()">See Answers</button>
+    </div>
+    <div id="key_activity_2" class="answer-key-box">
+        <strong>Activity 2 Key:</strong> All correct choices are currently set as the top option inside each selection module. Use this list to quickly inspect correct functional matching patterns.
+    </div>
 
-    /* 3. RENDER CONTENT */
-    const wrap = document.getElementById('p1-content');
-    modules.forEach(m => {
-        const div = document.createElement('div');
-        div.style.margin = "10px 0";
-        div.innerHTML = `${m.id}. ${m.text} 
-            <button class="btn-audio" onclick="speakText('${m.text}')">🔊 Pronounce</button>`;
-        wrap.appendChild(div);
-    });
+    <h2 class="section-title">Activity 3</h2>
+    <p style="font-style: italic; color: #64748b;">Choose the most precise phrasal verb.</p>
+    
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>1.</strong> The audit findings had been __________ in the board presentation. No one mentioned the covenant breach.</p>
+        <select id="act_b_opt_1" class="exercise-select" onchange="saveSelection('act_b_opt_1')">
+            <option value="">-- Choose option --</option>
+            <option value="a">glossed over</option>
+            <option value="b">papered over</option>
+        </select>
+    </div>
 
-    /* 4. TABS LOGIC */
-    document.querySelectorAll('.tab').forEach(t => {
-        t.addEventListener('click', () => {
-            document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-            document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
-            t.classList.add('active');
-            document.getElementById(t.dataset.tab).classList.add('active');
-        });
-    });
-</script>
-</body>
-</html>
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>2.</strong> His original forecast didn't __________ once the Q3 data came in.</p>
+        <select id="act_b_opt_2" class="exercise-select" onchange="saveSelection('act_b_opt_2')">
+            <option value="">-- Choose option --</option>
+            <option value="a">hold up</option>
+            <option value="b">bear out</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>3.</strong> The restructuring __________ risks that hadn't appeared in the original due diligence.</p>
+        <select id="act_b_opt_3" class="exercise-select" onchange="saveSelection('act_b_opt_3')">
+            <option value="">-- Choose option --</option>
+            <option value="a">threw up</option>
+            <option value="b">brought up</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>4.</strong> The committee chose to __________ the controversy and wait for the cycle to move on.</p>
+        <select id="act_b_opt_4" class="exercise-select" onchange="saveSelection('act_b_opt_4')">
+            <option value="">-- Choose option --</option>
+            <option value="a">ride out</option>
+            <option value="b">sit out</option>
+        </select>
+    </div>
+
+    <div class="scenario-card" style="border-left: 5px solid var(--pastel-blue-dark);">
+        <p><strong>5.</strong> She __________ the criticism in the meeting without responding.</p>
+        <select id="act_b_opt_5" class="exercise-select" onchange="saveSelection('act_b_opt_5')">
+            <option value="">-- Choose option --</option>
+            <option value="a">brushed off</option>
