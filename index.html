@@ -293,8 +293,7 @@ select.gex{padding:9px;border-radius:6px;border:1px solid #cbd5e1;font-size:15px
 
 <nav class="g-tab-nav">
   <button class="g-tab-btn active" onclick="showGTab('g1',this)">Activity 1 &mdash; Make or Do?</button>
-  <button class="g-tab-btn" onclick="showGTab('g2',this)">Activity 2 &mdash; The word &ldquo;so&rdquo;</button>
-  <button class="g-tab-btn" onclick="showGTab('g3',this)">Activity 3 &mdash; -ed Pronunciation &#x1F50A;</button>
+  <button class="g-tab-btn" onclick="showGTab('g3',this)">Activity 2 &mdash; -ed Pronunciation &#x1F50A;</button>
 </nav>
 
 <!-- ── G1: MAKE OR DO ── -->
@@ -364,8 +363,7 @@ select.gex{padding:9px;border-radius:6px;border:1px solid #cbd5e1;font-size:15px
 </div>
 </div><!-- /g1 -->
 
-<!-- ── G2: THE WORD SO ── -->
-<div id="g2" class="g-panel">
+<div id="g2_removed" style="display:none">
 <div class="g-intro">
   <h3>&#x1F9E0; The word &ldquo;so&rdquo; &mdash; four key uses</h3>
   <div class="rule"><strong>1. Replacing a clause after: think / hope / believe / suppose / expect / be afraid / imagine</strong><br>
@@ -432,8 +430,6 @@ select.gex{padding:9px;border-radius:6px;border:1px solid #cbd5e1;font-size:15px
 1. <strong>so</strong> &bull; 2. <strong>so</strong> &bull; 3. <strong>so</strong> (I don&rsquo;t think so) &bull; 4. <strong>So</strong> did I &bull; 5. <strong>Neither</strong> has my manager<br>
 6. <strong>so</strong> &bull; 7. <strong>so</strong> (intensifier before &ldquo;much&rdquo;) &bull; 8. <strong>so</strong> &bull; 9. <strong>Neither</strong> does he &bull; 10. <strong>so</strong>
 </div>
-</div><!-- /g2 -->
-
 <!-- ── G3: -ED PRONUNCIATION ── -->
 <div id="g3" class="g-panel">
 <div class="g-intro">
@@ -607,9 +603,11 @@ function checkG2(){
 function speak(text,event){
   if(event)event.stopPropagation();
   if(window.speechSynthesis.speaking)window.speechSynthesis.cancel();
+  setTimeout(()=>{
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US';u.rate=0.82;u.pitch=1;
+  u.lang='en-GB';u.rate=0.78;u.pitch=1;
   window.speechSynthesis.speak(u);
+  },350);
 }
 
 // ── PRONUNCIATION SORT DATA ────────────────────────────────
