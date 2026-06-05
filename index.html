@@ -102,12 +102,12 @@
             margin-top: 10px;
         }
         .grave-sub-header {
-            color: var(--grave-slate);
-            font-size: 18px;
-            margin-top: 30px;
+            color: var(--grave-dark);
+            font-size: 19px;
+            margin-top: 35px;
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 1px solid #cbd5e1;
+            border-bottom: 2px solid var(--border-color);
         }
         .scenario-card { 
             background: white; 
@@ -201,14 +201,14 @@
         .graveyard-card {
             border-left: 6px solid var(--grave-slate);
             background-color: var(--grave-bg);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .graveyard-explanation {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             padding: 18px;
             border-radius: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-size: 14px;
             line-height: 1.6;
         }
@@ -248,7 +248,7 @@
             font-weight: bold;
         }
         .btn-validate.btn-grave {
-            background-color: var(--grave-slate);
+            background-color: #2e3b4e;
         }
         .btn-answers {
             background-color: #64748b;
@@ -259,6 +259,9 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+        }
+        .btn-answers.btn-grave-toggle {
+            background-color: #647a90;
         }
         .btn-validate:hover, .btn-answers:hover { opacity: 0.9; }
         .answer-key-box {
@@ -276,6 +279,100 @@
             border-left-color: var(--grave-slate);
             color: var(--grave-dark);
         }
+
+        /* --- DRAG & DROP ENGINE STYLING (PART C) --- */
+        .drag-pool-container {
+            background: #ffffff;
+            border: 2px dashed #94a3b8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            min-height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .board-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        @media(max-width: 768px) {
+            .board-layout { grid-template-columns: 1fr; }
+        }
+        .board-column {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.2s;
+        }
+        .board-column.drag-over {
+            background-color: #e2e8f0;
+            border-color: #64748b;
+        }
+        .column-header-block {
+            text-align: center;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .column-header-block h4 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: var(--grave-dark);
+        }
+        .audio-control-btn {
+            background-color: var(--grave-slate);
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .audio-control-btn:hover { background-color: var(--grave-dark); }
+        .drop-zone-landing {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 250px;
+        }
+        .draggable-verb-token {
+            background-color: #ffffff;
+            color: var(--grave-dark);
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: grab;
+            user-select: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.1s, background-color 0.3s;
+        }
+        .draggable-verb-token:active { cursor: grabbing; transform: scale(0.97); }
+        .draggable-verb-token.token-correct {
+            background-color: #e2f0d9 !important;
+            border-color: #385723 !important;
+            color: #274e13 !important;
+        }
+        .draggable-verb-token.token-incorrect {
+            background-color: #fce4d6 !important;
+            border-color: #c65911 !important;
+            color: #7e22ce !important;
+        }
     </style>
 </head>
 <body>
@@ -283,7 +380,7 @@
 <div class="container">
     <header>
         <h1>MIKEL - ENGLISH 2.0</h1>
-        <div class="header-date">June 4, 2026</div>
+        <div class="header-date">June 5, 2026</div>
     </header>
 
     <!-- Navigation Tabs System -->
@@ -722,6 +819,15 @@
             </div>
         </div>
 
+        <!-- Verification Unit for Part A based on image_c351a0.png layout -->
+        <div class="button-group" style="margin-bottom: 35px;">
+            <button class="btn-validate btn-grave" onclick="validateGraveyardPartA()">Bury All Mistakes</button>
+            <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_a')">Show/Hide Answers</button>
+        </div>
+        <div id="key_grave_a" class="answer-key-box grave-key-box" style="margin-bottom: 40px;">
+            <strong>Part A (Collocations Key):</strong> 1. make | 2. do | 3. make | 4. do | 5. make | 6. do | 7. makes | 8. do | 9. make | 10. do
+        </div>
+
         <!-- PART B: PRO-CLAUSE SUBSTITUTION -->
         <h3 class="grave-sub-header">Part B: Pro-Clause Substitution ("So" / "Not")</h3>
         <div class="graveyard-explanation">
@@ -731,7 +837,6 @@
         </div>
 
         <div class="graveyard-card">
-            <!-- Item 1 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Do you think the ethics committee will flag the anomalous data in our third chapter?"</span>
                 <strong>1.</strong> Given their recent track record with administrative oversights, I don't 
@@ -744,7 +849,6 @@
                 so.
             </div>
 
-            <!-- Item 2 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Will the department head demand a complete audit of the clinical trials?"</span>
                 <strong>2.</strong> The structural budget is already overstretched, so I 
@@ -757,7 +861,6 @@
                 so.
             </div>
 
-            <!-- Item 3 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Has the supervisor decided to reject her late thesis extension appeal?"</span>
                 <strong>3.</strong> He values strict adherence to protocol, so I 
@@ -770,7 +873,6 @@
                 so.
             </div>
 
-            <!-- Item 4 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Is there any risk that the anonymous clip will go viral outside the university?"</span>
                 <strong>4.</strong> The communications team intervened quickly, so I 
@@ -783,7 +885,6 @@
                 not.
             </div>
 
-            <!-- Item 5 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Do the external examiners believe this monograph is a direct case of plagiarism?"</span>
                 <strong>5.</strong> The evidence is purely circumstantial, so I don't 
@@ -796,7 +897,6 @@
                 so.
             </div>
 
-            <!-- Item 6 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Will we have to wind up the data collection phase ahead of schedule?"</span>
                 <strong>6.</strong> Unless the sponsor withdraws the restrictive clause, I 
@@ -809,7 +909,6 @@
                 so.
             </div>
 
-            <!-- Item 7 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Are the faculty members going to carry over these budget adjustments into next term?"</span>
                 <strong>7.</strong> The deficit has finally leveled off, so I 
@@ -822,7 +921,6 @@
                 not.
             </div>
 
-            <!-- Item 8 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Did she pass off her assistant's research as her own during the seminar?"</span>
                 <strong>8.</strong> Her moral integrity is usually beyond question, so I 
@@ -835,7 +933,6 @@
                 not.
             </div>
 
-            <!-- Item 9 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Is the integrity tribunal going to throw out our appeal on purely procedural grounds?"</span>
                 <strong>9.</strong> We completed all the necessary groundwork, so I shouldn't 
@@ -848,7 +945,6 @@
                 so.
             </div>
 
-            <!-- Item 10 -->
             <div class="gapfiller-sentence">
                 <span class="grave-context-hint">Context: "Will this minor statistical variance do more harm than good to our overall thesis?"</span>
                 <strong>10.</strong> We have carefully factored in the mitigating variables, so I should 
@@ -862,14 +958,71 @@
             </div>
         </div>
 
-        <div class="button-group">
-            <button class="btn-validate btn-grave" onclick="validateWholeGraveyard()">Bury All Mistakes</button>
-            <button class="btn-answers" onclick="toggleAnswers('key_graveyard')">Show/Hide Answers</button>
+        <!-- Verification Unit for Part B based on image_c351a0.png layout -->
+        <div class="button-group" style="margin-bottom: 35px;">
+            <button class="btn-validate btn-grave" onclick="validateGraveyardPartB()">Bury All Mistakes</button>
+            <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_b')">Show/Hide Answers</button>
         </div>
-        <div id="key_graveyard" class="answer-key-box grave-key-box">
-            <strong>The Graveyard Keys:</strong><br>
-            <strong>Part A (Make/Do):</strong> 1. make | 2. do | 3. make | 4. do | 5. make | 6. do | 7. makes | 8. do | 9. make | 10. do<br>
-            <strong>Part B ("So" Substitution):</strong> 1. think | 2. fear | 3. expect | 4. hope | 5. believe | 6. suppose | 7. imagine | 8. trust | 9. think | 10. hope
+        <div id="key_grave_b" class="answer-key-box grave-key-box" style="margin-bottom: 40px;">
+            <strong>Part B (Pro-Clauses Key):</strong> 1. think | 2. fear | 3. expect | 4. hope | 5. believe | 6. suppose | 7. imagine | 8. trust | 9. think | 10. hope
+        </div>
+
+        <!-- PART C: PRONUNCIATION OF REGULAR -ED ENDINGS -->
+        <h3 class="grave-sub-header">Part C: The Pronunciation Sorting Board (-ed Endings)</h3>
+        <div class="graveyard-explanation">
+            <strong>The Phonetic Engine Rulebook:</strong> Do not add artificial extra syllables. 
+            <br>• <strong>/t/ sound:</strong> After unvoiced vocal sounds (k, p, s, ch, sh, f). *No extra syllable.*
+            <br>• <strong>/d/ sound:</strong> After voiced vocal sounds (l, n, r, v, z, b, g) or vowels. *No extra syllable.*
+            <br>• <strong>/ɪd/ sound:</strong> ONLY after native <strong>T</strong> or <strong>D</strong> root sounds. *Adds an extra syllable.*
+            <br><br><em>Click the anchor audio icon in each column header to hear the reference sound standard before dragging.</em>
+        </div>
+
+        <!-- Draggable Tokens Master Deck Pool Container -->
+        <div style="font-weight: bold; margin-bottom: 6px; color: var(--grave-dark);">Unsorted Regular Verbs Deck:</div>
+        <div id="master_verb_pool" class="drag-pool-container" ondragover="allowDropElement(event)" ondrop="dropElement(event, 'master_verb_pool')">
+            <!-- Tokens injected dynamically via script below -->
+        </div>
+
+        <!-- Interactive Grid Sorting Columns Map Layout -->
+        <div class="board-layout">
+            <!-- COLUMN 1: /t/ -->
+            <div class="board-column" id="col_t" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_t')">
+                <div class="column-header-block">
+                    <h4>Column /t/</h4>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('t')">🔊 Listen: "Worked"</button>
+                </div>
+                <div class="drop-zone-landing" id="landing_t"></div>
+            </div>
+
+            <!-- COLUMN 2: /d/ -->
+            <div class="board-column" id="col_d" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_d')">
+                <div class="column-header-block">
+                    <h4>Column /d/</h4>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('d')">🔊 Listen: "Lived"</button>
+                </div>
+                <div class="drop-zone-landing" id="landing_d"></div>
+            </div>
+
+            <!-- COLUMN 3: /ɪd/ -->
+            <div class="board-column" id="col_id" ondragover="allowDropElement(event)" ondragenter="dragEnterColumn(event)" ondragleave="dragLeaveColumn(event)" ondrop="dropElement(event, 'col_id')">
+                <div class="column-header-block">
+                    <h4>Column /ɪd/</h4>
+                    <button class="audio-control-btn" onclick="playReferenceAudio('id')">🔊 Listen: "Visited"</button>
+                </div>
+                <div class="drop-zone-landing" id="landing_id"></div>
+            </div>
+        </div>
+
+        <!-- Verification Unit for Part C based on image_c351a0.png layout -->
+        <div class="button-group">
+            <button class="btn-validate btn-grave" onclick="validateGraveyardPartC()">Bury Pronunciation Mistakes</button>
+            <button class="btn-answers btn-grave-toggle" onclick="toggleAnswers('key_grave_c')">Show/Hide Answers</button>
+        </div>
+        <div id="key_grave_c" class="answer-key-box grave-key-box">
+            <strong>Part C (Pronunciation Matrix Key):</strong><br>
+            • <strong>/t/ Cluster:</strong> Worked, Developed, Finished, Checked, Discussed, Fixed, Dropped, Launched, Approached, Risked<br>
+            • <strong>/d/ Cluster:</strong> Lived, Changed, Managed, Derived, Explained, Offered, Improved, Maintained, Resolved, Prepared<br>
+            • <strong>/ɪd/ Cluster:</strong> Visited, Interested, Decided, Accepted, Requested, Audited, Suggested, Funded, Demanded, Conducted
         </div>
     </div>
 
@@ -882,18 +1035,20 @@
         activity2: {},
         activity3: {},
         graveyard: {},
-        graveyardSo: {}
+        graveyardSo: {},
+        graveyardBoard: {} // Preserves dropped element mappings
     };
 
-    // Structural sanitization checks
+    // Structural initialization loops
     if (!progressState.graveyard) progressState.graveyard = {};
     if (!progressState.graveyardSo) progressState.graveyardSo = {};
+    if (!progressState.graveyardBoard) progressState.graveyardBoard = {};
 
     function saveToDisk() {
         localStorage.setItem(STORAGE_KEY_MKL, JSON.stringify(progressState));
     }
 
-    // Dynamic Tab Controller 
+    // Dynamic Tab Navigation Controller 
     function switchTabs(targetTabId, clickedBtnId) {
         const modules = document.getElementsByClassName('tab-content');
         for (let i = 0; i < modules.length; i++) {
@@ -923,6 +1078,7 @@
         saveToDisk();
     }
 
+    // Graveyard Local State Persist Drivers
     function saveGrave(selectId) {
         progressState.graveyard[selectId] = document.getElementById(selectId).value;
         saveToDisk();
@@ -930,6 +1086,113 @@
 
     function saveGraveSo(selectId) {
         progressState.graveyardSo[selectId] = document.getElementById(selectId).value;
+        saveToDisk();
+    }
+
+    /* --- DRAG & DROP ENGINE SCRIPTING (PART C) --- */
+    const verbMasterData = [
+        { id: 'v1', text: 'Worked', target: 'col_t' },
+        { id: 'v2', text: 'Developed', target: 'col_t' },
+        { id: 'v3', text: 'Finished', target: 'col_t' },
+        { id: 'v4', text: 'Checked', target: 'col_t' },
+        { id: 'v5', text: 'Discussed', target: 'col_t' },
+        { id: 'v6', text: 'Fixed', target: 'col_t' },
+        { id: 'v7', text: 'Dropped', target: 'col_t' },
+        { id: 'v8', text: 'Launched', target: 'col_t' },
+        { id: 'v9', text: 'Approached', target: 'col_t' },
+        { id: 'v10', text: 'Risked', target: 'col_t' },
+        { id: 'v11', text: 'Lived', target: 'col_d' },
+        { id: 'v12', text: 'Changed', target: 'col_d' },
+        { id: 'v13', text: 'Managed', target: 'col_d' },
+        { id: 'v14', text: 'Derived', target: 'col_d' },
+        { id: 'v15', text: 'Explained', target: 'col_d' },
+        { id: 'v16', text: 'Offered', target: 'col_d' },
+        { id: 'v17', text: 'Improved', target: 'col_d' },
+        { id: 'v18', text: 'Maintained', target: 'col_d' },
+        { id: 'v19', text: 'Resolved', target: 'col_d' },
+        { id: 'v20', text: 'Prepared', target: 'col_d' },
+        { id: 'v21', text: 'Visited', target: 'col_id' },
+        { id: 'v22', text: 'Interested', target: 'col_id' },
+        { id: 'v23', text: 'Decided', target: 'col_id' },
+        { id: 'v24', text: 'Accepted', target: 'col_id' },
+        { id: 'v25', text: 'Requested', target: 'col_id' },
+        { id: 'v26', text: 'Audited', target: 'col_id' },
+        { id: 'v27', text: 'Suggested', target: 'col_id' },
+        { id: 'v28', text: 'Funded', target: 'col_id' },
+        { id: 'v29', text: 'Demanded', target: 'col_id' },
+        { id: 'v30', text: 'Conducted', target: 'col_id' }
+    ];
+
+    // Reference Audio Synthesis Driver Mapping API
+    function playReferenceAudio(typeKey) {
+        let textTarget = "";
+        if (typeKey === 't') textTarget = "worked";
+        if (typeKey === 'd') textTarget = "lived";
+        if (typeKey === 'id') textTarget = "visited";
+        
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            let utterance = new SpeechSynthesisUtterance(textTarget);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.85; 
+            window.speechSynthesis.speak(utterance);
+        } else {
+            alert("Speech engine error. Please check browser configuration constraints.");
+        }
+    }
+
+    function initPronunciationBoard() {
+        const pool = document.getElementById('master_verb_pool');
+        
+        // Render or assign storage targets mapping allocations
+        verbMasterData.forEach(verb => {
+            const token = document.createElement('div');
+            token.className = 'draggable-verb-token';
+            token.draggable = true;
+            token.id = verb.id;
+            token.innerText = verb.text;
+            
+            token.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', token.id);
+            });
+
+            // Check if prior local coordinate mapping exists
+            const savedLandingId = progressState.graveyardBoard[verb.id];
+            if (savedLandingId && savedLandingId !== 'master_verb_pool') {
+                const zone = document.getElementById(savedLandingId.replace('col_', 'landing_'));
+                if (zone) zone.appendChild(token);
+            } else {
+                pool.appendChild(token);
+            }
+        });
+    }
+
+    function allowDropElement(e) { e.preventDefault(); }
+    function dragEnterColumn(e) { e.currentTarget.classList.add('drag-over'); }
+    function dragLeaveColumn(e) { e.currentTarget.classList.remove('drag-over'); }
+
+    function dropElement(e, targetContainerId) {
+        e.preventDefault();
+        const columnElement = document.getElementById(targetContainerId);
+        if (columnElement) columnElement.classList.remove('drag-over');
+
+        const tokenId = e.dataTransfer.getData('text/plain');
+        const tokenNode = document.getElementById(tokenId);
+        if (!tokenNode) return;
+
+        // Reset state indicator flags during repositioning cycles
+        tokenNode.classList.remove('token-correct', 'token-incorrect');
+
+        if (targetContainerId === 'master_verb_pool') {
+            document.getElementById('master_verb_pool').appendChild(tokenNode);
+            progressState.graveyardBoard[tokenId] = 'master_verb_pool';
+        } else {
+            const landingZone = document.getElementById(targetContainerId.replace('col_', 'landing_'));
+            if (landingZone) {
+                landingZone.appendChild(tokenNode);
+                progressState.graveyardBoard[tokenId] = targetContainerId;
+            }
+        }
         saveToDisk();
     }
 
@@ -961,6 +1224,8 @@
             const el = document.getElementById(id);
             if (el) el.value = progressState.graveyardSo[id];
         }
+        // Run Part C Sorting Engine Initialization
+        initPronunciationBoard();
     };
 
     // Evaluation framework validation engines
@@ -999,16 +1264,11 @@
         alert('Activity 3 Evaluation complete! Score: ' + scoredCorrect + ' / ' + Object.keys(structuralMap).length);
     }
 
-    function validateWholeGraveyard() {
-        // Part A evaluation matrix
+    // Isolated Graveyard Part A Validation Logic
+    function validateGraveyardPartA() {
         const partAKey = {
             'grave_1': 'make', 'grave_2': 'do', 'grave_3': 'make', 'grave_4': 'do', 'grave_5': 'make',
             'grave_6': 'do', 'grave_7': 'makes', 'grave_8': 'do', 'grave_9': 'make', 'grave_10': 'do'
-        };
-        // Part B evaluation matrix
-        const partBKey = {
-            'grave_so_1': 'think', 'grave_so_2': 'fear', 'grave_so_3': 'expect', 'grave_so_4': 'hope', 'grave_so_5': 'believe',
-            'grave_so_6': 'suppose', 'grave_so_7': 'imagine', 'grave_so_8': 'trust', 'grave_so_9': 'think', 'grave_so_10': 'hope'
         };
 
         let scoreA = 0;
@@ -1021,6 +1281,15 @@
                 el.style.backgroundColor = '#fce4d6'; el.style.borderColor = '#c65911';
             }
         }
+        alert('Graveyard Part A Evaluation complete! ' + scoreA + ' / 10 collocations laid to rest.');
+    }
+
+    // Isolated Graveyard Part B Validation Logic
+    function validateGraveyardPartB() {
+        const partBKey = {
+            'grave_so_1': 'think', 'grave_so_2': 'fear', 'grave_so_3': 'expect', 'grave_so_4': 'hope', 'grave_so_5': 'believe',
+            'grave_so_6': 'suppose', 'grave_so_7': 'imagine', 'grave_so_8': 'trust', 'grave_so_9': 'think', 'grave_so_10': 'hope'
+        };
 
         let scoreB = 0;
         for (let targetId in partBKey) {
@@ -1032,8 +1301,37 @@
                 el.style.backgroundColor = '#fce4d6'; el.style.borderColor = '#c65911';
             }
         }
+        alert('Graveyard Part B Evaluation complete! ' + scoreB + ' / 10 pro-clauses laid to rest.');
+    }
 
-        alert('Graveyard Audit Complete!\n\nPart A (Collocations): ' + scoreA + ' / 10 laid to rest.\nPart B (Pro-Clauses): ' + scoreB + ' / 10 laid to rest.');
+    // Isolated Graveyard Part C Evaluation Framework Logic
+    function validateGraveyardPartC() {
+        let scoredCorrect = 0;
+        let elementsEvaluatedCount = 0;
+
+        verbMasterData.forEach(verb => {
+            const currentPosition = progressState.graveyardBoard[verb.id];
+            const tokenElement = document.getElementById(verb.id);
+            
+            if (tokenElement) {
+                elementsEvaluatedCount++;
+                if (currentPosition === verb.target) {
+                    tokenElement.classList.remove('token-incorrect');
+                    tokenElement.classList.add('token-correct');
+                    scoredCorrect++;
+                } else {
+                    tokenElement.classList.remove('token-correct');
+                    tokenElement.classList.add('token-incorrect');
+                }
+            }
+        });
+
+        if (elementsEvaluatedCount === 0) {
+            alert("Drag regular verbs into the phonetic columns before validation.");
+            return;
+        }
+
+        alert("Graveyard Part C Evaluation Complete!\nScore: " + scoredCorrect + " / 30 regular verbs correctly sorted.");
     }
 
     function toggleAnswers(containerId) {
